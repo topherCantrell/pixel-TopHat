@@ -13,3 +13,5 @@ Adafruit strips: 60 LEDs per meter. I want to maintain X/Y dimensions on the hat
 
 https://www.adafruit.com/product/1138
 
+# Construction
+
