@@ -2,7 +2,7 @@
 
 A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
-  - Side: 38pixels around x 10pixels high
+  - Crown: 38pixels around x 10pixels high
   - Top:
   - Brim:
 
