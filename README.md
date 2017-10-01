@@ -15,3 +15,5 @@ https://www.adafruit.com/product/1138
 
 # Construction
 
+![](https://github.com/topherCantrell/pixelHat/blob/master/art/construct1.jpg)
+
