@@ -14,3 +14,5 @@ The dimensions are tricky. I want the LEDs to fit perfectly in a grid around the
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/construct1.jpg" width="500">
 
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/construct2.jpg" width="500">
+
