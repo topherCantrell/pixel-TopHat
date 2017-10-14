@@ -16,3 +16,17 @@ The dimensions are tricky. I want the LEDs to fit perfectly in a grid around the
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/construct2.jpg" width="500">
 
+# Stop the presses!
+
+Gary Dion found much cheaper neo solutions on ebay.
+
+I bought five of these for $184.25:
+http://www.ebay.com/itm/282616038722
+
+I bought one of these for $48.34:
+http://www.ebay.com/itm/311923131692
+
+I bought 4 meters of 144/m of these for $67.20:
+http://www.ebay.com/itm/222533276234
+
+The plan is for the band to be 68x16 pixels. 16 high gets me most of the arcade sprites (pacman, etc). I thought the circle plate would be nice on top, but I may want the top oval. The strips are to fill in the brim (and probably top).
