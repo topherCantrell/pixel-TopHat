@@ -35,7 +35,7 @@ The plan is for the band to be 68x16 pixels. 16 high gets me most of the arcade 
 
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/PropBoard.jpg">
-
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic.jpg">
+
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic2.jpg">
 
