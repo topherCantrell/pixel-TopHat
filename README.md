@@ -8,38 +8,38 @@ at Digikey.
 
 # Parts
 
-Four flexible grids for the body. $148:
+Four flexible grids for the body. $148<br>
 http://www.ebay.com/itm/282616038722
 
-One pixel circle for the top. $48
+One pixel circle for the top. $48<br>
 http://www.ebay.com/itm/311923131692
 
-Six meters of 144/m strips for the brim and fill for the top. $100.80:
+Six meters of 144/m strips for the brim and fill for the top. $100.80<br>
 http://www.ebay.com/itm/222533276234
 
-One DC/DC converter from Digikey. $36
+One DC/DC converter from Digikey. $36<br>
 https://www.digikey.com/product-detail/en/delta-electronics/E36SC05025NRFA/941-1638-ND/3995553
 
-Two 24V batteries from Lowe's. $20
+Two 24V batteries from Lowe's. $20<br>
 https://www.lowes.com/pd/Kobalt-24-Volt-1-5-Amp-Hours-Lithium-Power-Tool-Battery/1000090833
 
-One Kobalt battery charger from Lowe's. $40
+One Kobalt battery charger from Lowe's. $40<br>
 https://www.lowes.com/pd/Kobalt-24-Volt-Max-Power-Tool-Battery-Charger/1000102901
 
-One foam pad from Amazon. $13
+One foam pad from Amazon. $13<br>
 https://www.amazon.com/gp/product/B00069PFKK/ref=oh_aui_detailpage_o05_s00
 
-Eight 1000uF capacitors from DigiKey. $5
+Eight 1000uF capacitors from DigiKey. $5<br>
 https://www.digikey.com/product-detail/en/rubycon/25PX1000MEFCT810X16/1189-1583-1-ND/3134540
 
-Two logic-level converters from Sparkfun. $6
+Two logic-level converters from Sparkfun. $6<br>
 https://www.sparkfun.com/products/12009
 
 Contact cement, wires, etc.
 
-I reused two propeller boards from a previous project:
-https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch
-https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.pcb
+I reused two propeller boards from a previous project:<br>
+https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch<br>
+https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.pcb<br>
 
 # Construction
 
