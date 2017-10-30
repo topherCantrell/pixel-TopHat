@@ -60,3 +60,27 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic2.jpg">
 
+# Animation Sequences
+
+## Pacman
+  - Line of all 4 ghosts chase Pacman around the brim a couple of times
+  - They get closer and closer
+  - A power pill appears
+  - Pacman eats it, they turn blue, and he truns to chase them eating them one by one
+  - The scores fly around the hat behind him
+  - They start flashing. Before he can eat the last one it changes.
+  - The ghost disappears and pacman dies.
+  
+## Mario
+  - Mario from Donkey Kong runs around the hat. There is no room for him to jump.
+  
+## QBert
+  - Qbert stands on the side of the hat
+  - A pacman ghost bumps into him and runs off
+  - Qbert spews his swear line
+  
+## Space Invaders
+  - Two lines of space invaders march around the hat
+  - The bottom row is shot out one by one
+  - The top row advances down
+  - The flying saucer flashes around the top line
