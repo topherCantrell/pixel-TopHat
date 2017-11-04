@@ -3,28 +3,57 @@ CON
   _xinfreq        = 5_000_000
 
 CON
-    PIN_D1 = 0
+    
+    pinDO   = 27
+    pinSCLK = 26
+    pinDI   = 25
+    pinCS   = 24
 
 OBJ    
-    STRIP    : "NeoPixelStrip"    
-    'PST      : "Parallax Serial Terminal"      
+    'STRIP    : "NeoPixelStrip"    
+    PST      : "Parallax Serial Terminal"
+    SD       : "SDCard"      
 
-VAR    
-    
-PUB Main
+VAR
 
-  ' Go ahead and drive the pixel data lines low.
-  dira[PIN_D1] := 1
-  outa[PIN_D1] := 0
+    byte sectorBuffer[2048]
 
-  STRIP.init
+PUB Main | i
 
-  PauseMSec(1000)
-
-  STRIP.draw(2, @colors, @pixels, PIN_D1, 256)
+  dira[6] := 1 ' blue
 
   repeat
+    outa[6] := 1
     PauseMSec(5000)
+    outa[6] := 0
+    PauseMSec(5000)
+
+  
+
+  PauseMSec(2000)
+
+  PST.start(115200)
+  
+  i := SD.start(@sectorBuffer, pinDO, pinSCLK, pinDI, pinCS)
+
+  PST.hex(i,8)
+
+  repeat  
+    
+PUB Main2
+
+  ' Go ahead and drive the pixel data lines low.
+  'dira[PIN_D1] := 1
+  'outa[PIN_D1] := 0
+
+  'STRIP.init
+
+  'PauseMSec(1000)
+
+  'STRIP.draw(2, @colors, @pixels, PIN_D1, 256)
+
+  'repeat
+    'PauseMSec(5000)
   
       
 PRI PauseMSec(Duration)
