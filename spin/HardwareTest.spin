@@ -15,10 +15,13 @@ CON
     pinRX   = 7 ' Green
 
 ' NeoPixel
-    pinD1 = 19 ' Purple   ' D5
-    pinD2 = 20 ' White    ' D6
-    pinD3 = 21 ' Yellow   ' D7
-    pinD4 = 22 ' Gray     ' D8
+    pinD1   = 19 ' Purple   ' D5
+    pinD2   = 20 ' White    ' D6
+    pinD3   = 21 ' Yellow   ' D7
+    pinD4   = 22 ' Gray     ' D8
+
+' Button (CPU 1 only)
+    pinBT   = 10
 
 OBJ    
     STRIP    : "NeoPixelStrip"    
@@ -28,6 +31,26 @@ OBJ
 VAR
 
     byte sectorBuffer[2048]
+
+
+pub ButtonTest | i
+
+  dira[10] := 0
+
+  PauseMSec(2000) 
+  PST.start(115200)
+
+  repeat
+    i := ina[10]
+    PST.hex(i,2)
+    PauseMSec(500)
+
+  
+
+pub PinTest | i
+    
+  pulsePin(pinRX)
+  
 
 pri MainNEOSpeedTest | i
 
