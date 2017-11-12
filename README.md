@@ -92,3 +92,8 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
   - The bottom row is shot out one by one
   - The top row advances down
   - The flying saucer flashes around the top line
+
+## Sprites
+
+http://simonowen.com/sam/articles/pacemu/
+
