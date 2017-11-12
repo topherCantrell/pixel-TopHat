@@ -83,6 +83,31 @@ pri MainSDSpeedTest | i
   
   repeat
 
+
+
+pri SimpleReadTest    | i
+  PauseMSec(2000)
+
+  PST.start(115200)
+  
+  i := SD.start(@sectorBuffer, pinDO, pinSCLK, pinDI, pinCS)   
+  
+  i := SD.getFirstFileSector
+  PST.hex(i,8)
+  PST.char(13)
+
+  SD.readFileSectors(@sectorBuffer,0,1)
+  dumpSector(@sectorBuffer)
+
+
+ 
+PUB MainPulse
+
+  pulsePin(22)    
+      
+PRI PauseMSec(Duration)
+  waitcnt(((clkfreq / 1_000 * Duration - 3932) #> 381) + cnt)
+
 pri dumpSector(address) | i,j,t
     t:=0
     repeat i from 0 to 31
@@ -103,40 +128,7 @@ pri pulsePin(p)
         PauseMSec(5000)
         outa[p] := 0
         PauseMSec(5000)
-
-PUB SimpleReadTest    | i
-  PauseMSec(2000)
-
-  PST.start(115200)
-  
-  i := SD.start(@sectorBuffer, pinDO, pinSCLK, pinDI, pinCS)   
-  
-  i := SD.getFirstFileSector
-  PST.hex(i,8)
-  PST.char(13)
-
-  SD.readFileSectors(@sectorBuffer,0,1)
-  dumpSector(@sectorBuffer)
-
-  
-PUB MainStrip
-
-  ' Go ahead and drive the pixel data lines low.
-  'dira[PIN_D1] := 1
-  'outa[PIN_D1] := 0
-
-  'STRIP.init
-
-  'PauseMSec(1000)
-
-  'STRIP.draw(2, @colors, @pixels, PIN_D1, 256)
-
-  'repeat
-  
-      
-PRI PauseMSec(Duration)
-  waitcnt(((clkfreq / 1_000 * Duration - 3932) #> 381) + cnt)
-
+        
 DAT
 
 colors
