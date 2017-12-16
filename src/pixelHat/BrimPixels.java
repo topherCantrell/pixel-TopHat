@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class BrimPixels extends JPanel {
+public class BrimPixels extends JPanel implements PixelContainer {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -31,6 +31,11 @@ public class BrimPixels extends JPanel {
 			}
 		}
 		
+	}
+	
+	@Override
+	public void setPixel(int x, int y, int color) {
+		pixels[y][x] = color;
 	}
 
 }

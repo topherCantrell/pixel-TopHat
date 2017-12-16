@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class BodyPixels extends JPanel {
+public class BodyPixels extends JPanel implements PixelContainer {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,6 +32,11 @@ public class BodyPixels extends JPanel {
 			}
 		}
 		
+	}
+
+	@Override
+	public void setPixel(int x, int y, int color) {
+		pixels[y][x] = color;
 	}
 
 }
