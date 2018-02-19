@@ -1,5 +1,7 @@
 # PixelHat
 
+https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+
 A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Thanks to Gary Dion (http://garydion.com/). He helped  design the pixel layout,
