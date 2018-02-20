@@ -1,12 +1,17 @@
 # PixelHat
 
-https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
-
 A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Thanks to Gary Dion (http://garydion.com/). He helped  design the pixel layout,
 and he found all of the Neo Pixels on eBay. He also found the 5V DC converter 
 at Digikey.
+
+# Info
+
+https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+
+https://diyprojects.io/python-code-read-serial-port-raspberry-pi/#.WowhByXwZhE
+
 
 # Parts
 
