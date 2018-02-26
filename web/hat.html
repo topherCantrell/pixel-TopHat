@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Pixel Hat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="bootstrap-slider.css">
+    <script src="bootstrap-slider.min.js"></script>
+    <style>
+      #ex1Slider {
+      width:500px;
+      }
+      #ex1Slider .slider-selection {
+	    background: #BABABA;	    
+      }
+      .top-buffer {
+        margin-top:20px;
+      }      
+    </style>
+    </head>
+  <body>
+  
+  <div class="container">
+  <div class="row top-buffer">
+    <div class="col">
+     <button class="btn btn-success" type="button">Start</button>
+    </div>  
+    <div class="col">
+     <button class="btn btn-danger" type="button">Team Red</button>
+    </div>  
+    <div class="col">
+     <button class="btn btn-primary" type="button">Team Blue</button>
+    </div>
+  </div>
+  
+    <hr>
+    <div class="row top-buffer">
+    <div class="col-sm-1">
+    <button class="btn btn-secondary" type="button">Scroll</button>
+    </div>
+    <div class="col">
+    <input class="form-control" type="text">
+    </div>
+    </div>
+    
+    <div class="row top-buffer">
+    <div class="col">
+    Brightness:
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-8">
+    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+    </div>
+    </div>
+    
+        <hr>
+        
+        <div class="row top-buffer">
+    <div class="col">
+     <button class="btn btn-info" type="button">Circles</button>
+    </div>
+  
+    <div class="col">
+     <button class="btn btn-info" type="button">PacMan</button>
+    </div>
+  
+    <div class="col">
+     <button class="btn btn-info" type="button">Kong</button>
+    </div>
+  </div>
+    
+    <script>
+ // With JQuery
+    $('#ex1').slider({
+    	formatter: function(value) {
+    		return 'Current value: ' + value;
+    	},
+    	tooltip: 'always'
+    });    
+   
+    </script>
+    
+  
+    
+</div>
+  
+  </body>
+  
+</html>
