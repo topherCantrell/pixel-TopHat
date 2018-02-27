@@ -2,8 +2,10 @@
 <html lang="en">
 
   <head>
+  
     <meta charset="utf-8">
     <title>Pixel Hat</title>
+    
     <link rel="stylesheet" href="bootstrap.min.css">  
     <link rel="stylesheet" href="bootstrap-slider.css">
     <script src="jquery.min.js"></script>
@@ -20,76 +22,101 @@
         }
         .top-buffer {
             margin-top:20px;
+        }   
+        .top-big-buffer {
+            margin-top:40px;
         }      
     </style>
     
     </head>
-  <body>
+    <body>
   
-  <div class="container">
-  <div class="row top-buffer">
-    <div class="col">
-     <button class="serial btn btn-success" type="button">Start</button>
-    </div>  
-    <div class="col">
-     <button class="serial btn btn-danger" type="button">Team Red</button>
-    </div>  
-    <div class="col">
-     <button class="serial btn btn-primary" type="button">Team Blue</button>
-    </div>
-  </div>
+        <div class="container">
+            <div class="row top-buffer">
+                <div class="col">
+                    <button class="serial btn btn-lg btn-block btn-success" type="button">Idle</button>
+                </div>  
+		        <div class="col">
+		            <button class="serial btn btn-lg btn-block btn-danger" type="button">Team Red</button>
+		        </div>  
+		        <div class="col">
+		            <button class="serial btn btn-lg btn-block btn-primary" type="button">Team Blue</button>
+		        </div>
+            </div>
   
-    <hr>
-    <div class="row top-buffer">
-    <div class="col-sm-1">
-    <button class="btn btn-secondary" type="button">Scroll</button>
-    </div>
-    <div class="col">
-    <input class="form-control" type="text">
-    </div>
-    </div>
+	        <div class="row top-buffer">
+	            <div class="col">
+	                <div class="input-group">
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-secondary" type="button">Scroll</button>
+	                    </span>
+	                    <input type="text" class="form-control" placeholder="Message...">
+	                </div>
+	            </div>
+	        </div>
     
-    <div class="row top-buffer">
-    <div class="col">
-    Brightness:
-    </div>
-    </div>
+	        <div class="row top-buffer">
+	            <div class="col">
+	                Brightness:
+	            </div>
+	        </div>
     
-    <div class="row">
-    <div class="col-sm-8">
-    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
-    </div>
-    </div>
+	        <div class="row">
+	            <div class="col">
+	            <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="7"/>
+	            </div>
+	        </div>
     
-        <hr>
-        
-        <div class="row top-buffer">
-    <div class="col">
-     <button class="serial btn btn-info" type="button">Circles</button>
-    </div>
-  
-    <div class="col">
-     <button class="serial btn btn-info" type="button">PacMan</button>
-    </div>
-  
-    <div class="col">
-     <button class="serial btn btn-info" type="button">Kong</button>
-    </div>
-  </div>
+	        <div class="row top-big-buffer">
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Circles</button>
+	            </div>  
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">PacMan</button>
+	            </div>  
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Kong</button>
+	            </div>
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Flash</button>
+	            </div>
+	        </div>
+	        <div class="row top-buffer">
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Swirl</button>
+	            </div>  
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Fade</button>
+	            </div>  
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Zelda</button>
+	            </div>
+	            <div class="col">
+	                <button class="serial btn btn-lg btn-block btn-info" type="button">Party</button>
+	            </div>
+	        </div>
     
-    <script>
- $('#ex1').slider();    
+        	<script>
+        	
+ $('#ex1').slider();
+ 
+ var lastValue = 7;
+     
+ $('#ex1').on('slide', function(evt) {
+     if(evt.value!=lastValue) {     	
+     	lastValue = evt.value;
+     	$.get("/cgi/"+lastValue);
+     }
+ });
        
  $(".serial").click(function() {
      $.get("/cgi/"+this.textContent);
  });
    
-    </script>
+        	</script>  
     
+    	</div>
   
-    
-</div>
-  
-  </body>
+    </body>
   
 </html>
