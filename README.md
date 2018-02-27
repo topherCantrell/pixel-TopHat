@@ -41,10 +41,6 @@ I reused two propeller boards from a previous project:<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.pcb<br>
 
-# Construction Photos
-
-[CONSTRUCTION.md](CONSTRUCTION.md)
-
 # Power
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/power.jpg">
@@ -54,6 +50,8 @@ https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.p
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/cpus.jpg">
 
 # Construction
+
+[CONSTRUCTION.md](CONSTRUCTION.md)
 
 For the body of the hat I glued the four flexible grids to the foam curving the foam into a 
 circle as I went. I cut holes in the foam for the wires to pass through. I glued the edges of 
