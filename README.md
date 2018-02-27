@@ -6,15 +6,6 @@ Thanks to Gary Dion (http://garydion.com/). He helped  design the pixel layout,
 and he found all of the Neo Pixels on eBay. He also found the 5V DC converter 
 at Digikey.
 
-# Info
-
-https://github.com/SurferTim/documentation/blob/6bc583965254fa292a470990c40b145f553f6b34/configuration/wireless/access-point.md
-
-https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
-
-https://diyprojects.io/python-code-read-serial-port-raspberry-pi/#.WowhByXwZhE
-
-
 # Parts
 
 Four flexible grids for the body. $148<br>
@@ -50,6 +41,10 @@ I reused two propeller boards from a previous project:<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.pcb<br>
 
+# Construction Photos
+
+[CONSTRUCTION.md](CONSTRUCTION.md)
+
 # Power
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/power.jpg">
@@ -62,13 +57,13 @@ https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.p
 
 For the body of the hat I glued the four flexible grids to the foam curving the foam into a 
 circle as I went. I cut holes in the foam for the wires to pass through. I glued the edges of 
-the foam together to make a circle.
+the foam together to make a cylinder.
 
-I cut the elliptical top from the foam. I shaped the ellipse to the short axis is the diameter
+I cut the elliptical top from the foam. I shaped the ellipse so that the short axis is the diameter
 of the pixel circle. I put the pixel circle in the center and filled the long axis in with
 short pixel strips.
 
-The brim uses 64 strips of 9 pixels. 5 pixels stick out from the body, then folded to put 1
+The brim uses 64 strips of 8 pixels. 4 pixels stick out from the body, then folded to put 1
 pixel on the edge facing out, then folded again with 3 pixels on the bottom. 
 
 # Circuit
