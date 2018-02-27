@@ -105,3 +105,14 @@ The Pi Zero is configured as an access point. You connect to it with your phone 
 
 http://simonowen.com/sam/articles/pacemu/
 
+# SD Card Format
+
+Each animation sequence begins with a one-sector (512 bytes) descriptor:
+  - Number of sectors (4 bytes)
+  - Frames per second (4 bytes)
+  - Color map of 64 colors (for now) 64*4 = 256 bytes
+  
+The first sector is a map of the remaining animations. It is a list of 16-byte entries. An entry that
+starts with a 0 ends the list.
+  - Name (null terminated fixed 12 bytes)
+  - Starting sector (4 bytes)
