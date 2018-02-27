@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Pixel Hat</title>
+    <link rel="stylesheet" href="bootstrap.min.css">  
+    <link rel="stylesheet" href="bootstrap-slider.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>    
+    <script src="bootstrap-slider.min.js"></script>
+    
+    <style>
+        #ex1Slider {
+            width:500px;
+        }
+        #ex1Slider .slider-selection {
+	        background: #BABABA;	    
+        }
+        .top-buffer {
+            margin-top:20px;
+        }      
+    </style>
+    
+    </head>
+  <body>
+  
+  <div class="container">
+  <div class="row top-buffer">
+    <div class="col">
+     <button class="serial btn btn-success" type="button">Start</button>
+    </div>  
+    <div class="col">
+     <button class="serial btn btn-danger" type="button">Team Red</button>
+    </div>  
+    <div class="col">
+     <button class="serial btn btn-primary" type="button">Team Blue</button>
+    </div>
+  </div>
+  
+    <hr>
+    <div class="row top-buffer">
+    <div class="col-sm-1">
+    <button class="btn btn-secondary" type="button">Scroll</button>
+    </div>
+    <div class="col">
+    <input class="form-control" type="text">
+    </div>
+    </div>
+    
+    <div class="row top-buffer">
+    <div class="col">
+    Brightness:
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-8">
+    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+    </div>
+    </div>
+    
+        <hr>
+        
+        <div class="row top-buffer">
+    <div class="col">
+     <button class="serial btn btn-info" type="button">Circles</button>
+    </div>
+  
+    <div class="col">
+     <button class="serial btn btn-info" type="button">PacMan</button>
+    </div>
+  
+    <div class="col">
+     <button class="serial btn btn-info" type="button">Kong</button>
+    </div>
+  </div>
+    
+    <script>
+ $('#ex1').slider();    
+       
+ $(".serial").click(function() {
+     $.get("/cgi/"+this.textContent);
+ });
+   
+    </script>
+    
+  
+    
+</div>
+  
+  </body>
+  
+</html>

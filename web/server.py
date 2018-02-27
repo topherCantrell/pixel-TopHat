@@ -1,51 +1,22 @@
-import socket
+import tornado.ioloop
+import tornado.web
+import os
+        
+class CGIHandler(tornado.web.RequestHandler):
+    def get(self,first):
+        if (first=="chris"):
+            self.write("Hi Chris ")
+        self.write(":"+first+":")
+        print "PYSERIAL:"+first+":"
+        # send "first" and line-feed over pyserial
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+root = os.path.join(os.path.dirname(__file__), "webroot")
 
-s.bind( ("", 8888))
-s.listen(1)
+handlers = [
+    (r"/cgi/(.*)", CGIHandler),        
+    (r"/(.*)", tornado.web.StaticFileHandler, {"path": root, "default_filename": "index.html"}),
+    ]
 
-while True:
-    
-    conn, addr = s.accept()
-    
-    try:    
-        g = ""
-        
-        while "\n" not in g:
-            chunk = conn.recv(80)
-            if not chunk:
-                break
-            g = g + chunk
-            
-        url = g.split(" ")[1]
-        
-        # /                The index.html
-        # /cgi/command     A display command
-        # <anything else>  A static file
-        
-        print url
-        
-        if url=="/":
-            print "ROOT"
-            pass
-        elif url.startswith("/cgi/"):     
-            print "CGI:"+url       
-            pass
-        else:
-            # Attempt to send back static file
-            print "LOAD FILE"   
-            pass     
-        
-    except:
-        # Doesn't matter what happened. Ignore it.
-        pass
-    
-    finally:
-        # Always try to close the connection
-        try:
-            conn.close()
-        except:
-            pass
-    
-    
+app = tornado.web.Application(handlers)
+app.listen(8888)
+tornado.ioloop.IOLoop.current().start()
