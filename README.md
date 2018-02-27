@@ -70,6 +70,12 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic2.jpg">
 
+# Web Interface
+
+The Pi Zero is configured as an access point. You connect to it with your phone and load the control page.
+
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/web.jpg">
+
 # Animation Sequences
 
 ## Pacman
