@@ -1,14 +1,15 @@
 import tornado.ioloop
 import tornado.web
 import os
+import serial
         
 class CGIHandler(tornado.web.RequestHandler):
-    def get(self,first):
-        if (first=="chris"):
-            self.write("Hi Chris ")
+    def get(self,first):        
         self.write(":"+first+":")
-        print "PYSERIAL:"+first+":"
-        # send "first" and line-feed over pyserial
+        ser.write(bytes(first+"\n"))
+
+#ser = serial.Serial('COM9',115200)
+ser = serial.Serial('/dev/serial0',115200)
 
 root = os.path.join(os.path.dirname(__file__), "webroot")
 
