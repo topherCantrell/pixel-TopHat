@@ -1,3 +1,17 @@
+"""
+  - Use the sudo raspi-config to turn off the serial terminal but enable the serial hardware
+  - Install pyserial (probably already installed)
+  - Install tornado GLOBALLY like this: python -m pip install tornado
+  - This file is in a directory named "web". Copy the entire directory (and subs) to the pi home
+  - Add this line to /etc/rc.local (before the exit 0):
+  -   /home/pi/ONBOOT.sh 2> /home/pi/ONBOOT.errors > /home/pi/ONBOOT.stdout &
+  - Add the following ONBOOT.sh script to /home/pi and make it executable:
+  
+#!/bin/bash
+cd /home/pi/web
+/usr/bin/python server.py
+  
+"""
 import tornado.ioloop
 import tornado.web
 import os
