@@ -110,7 +110,8 @@
  });
        
  $(".serial").click(function() {
-     $.get("/cgi/"+this.textContent);
+	 var str = this.textContent.replace(/\s+/g, '');
+     $.get("/cgi/"+str);
  });
    
         	</script>  
