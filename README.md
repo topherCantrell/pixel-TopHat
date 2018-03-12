@@ -107,12 +107,18 @@ http://simonowen.com/sam/articles/pacemu/
 
 # SD Card Format
 
-Each animation sequence begins with a one-sector (512 bytes) descriptor:
-  - Number of sectors (4 bytes)
-  - Frames per second (4 bytes)
-  - Color map of 64 colors (for now) 64*4 = 256 bytes
+Each animation sequence begins with a three-sector (1536 bytes) descriptor:
+  - First Sector
+    - Number of frames (4 bytes)
+    - Frames per second (4 bytes)
+  - Second and Third Sector
+    - Color map of 256 colors 256*4 = 1024 bytes
   
-The first sector is a map of the remaining animations. It is a list of 16-byte entries. An entry that
+The first sector of the file is a map of the animations. It is a list of 16-byte entries. An entry that
 starts with a 0 ends the list.
   - Name (null terminated fixed 12 bytes)
   - Starting sector (4 bytes)
+
+# Software
+
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/cogs.jpg">
