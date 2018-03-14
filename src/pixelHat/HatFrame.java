@@ -309,10 +309,21 @@ public class HatFrame {
 		for(int x=0;x<1024;++x) ret[x] = data.get(x);
 		return ret;
 	}		
-	
-	/*
+		
 	public static void generateSpin(int [] data) {
 		int pos = 0;
+		for(int y=0;y<32;++y) {
+			System.out.print("  byte ");
+			for(int x=0;x<32;++x) {
+				String s = Integer.toString(data[pos++]).toUpperCase();
+				if(s.length()==1) s="0"+s;
+				System.out.print("$"+s);
+				if(x!=31) {
+					System.out.print(", ");
+				}				
+			}
+			System.out.println();
+		}
 		
 	}
 	
@@ -321,17 +332,16 @@ public class HatFrame {
 		HatFrame f = new HatFrame();
 		f.setPixel(0, 0x55);
 		f.setLine(5, 8);
-		f.setRing(12, 9);
-		
-		
+		f.setRing(12, 9);		
 		
 		String s = f.toString();
 		System.out.println(f.toString());
 		f.fromString(s);
 		System.out.println(f.toString());
-		int [] d = f.getBinary(true);		
+		int [] d = f.getBinary(true);
 		
-	}
-	*/
+		generateSpin(d);
+		
+	}	
 
 }
