@@ -310,6 +310,7 @@ public class HatFrame {
 		return ret;
 	}		
 	
+	/*
 	public static void generateSpin(int [] data) {
 		int pos = 0;
 		
@@ -328,9 +329,9 @@ public class HatFrame {
 		System.out.println(f.toString());
 		f.fromString(s);
 		System.out.println(f.toString());
-		int [] d = f.getBinary(true);
-		
+		int [] d = f.getBinary(true);		
 		
 	}
+	*/
 
 }
