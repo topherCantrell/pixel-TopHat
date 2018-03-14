@@ -11,20 +11,22 @@ public class HatFrame {
 	int [] topRing  = new int[241];
 	
 	int [] sideBrim = new int[256*6];
+	
+	// These mappings are my best attempt
 		
 	// 35 rings
 	// 64 lines	
 	
 	static final int[][] RINGS = {
-		{-1},
-		{-1},
-		{-1},
-		{-1},
-		{-1},
-		{-1},
-		{-1},
-		{-1},
-		{-1},
+		{-1}, // 0
+		{-1}, // 1,   8
+		{-1}, // 9,   20
+		{-1}, // 21,  36
+		{-1}, // 37,  60
+		{-1}, // 61,  92
+		{-1}, // 93,  132
+		{-1}, // Start spreading out to the side
+		{-1}, // Start spreading out to the side
 		//
 		{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63},
 		{64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127},
@@ -125,7 +127,7 @@ public class HatFrame {
 		while(y>=24) y=y-24;
 		sideBrim[y*64+x] = color;
 	}
-	public int getSidePrimPixel(int x, int y) {
+	public int getSideBrimPixel(int x, int y) {
 		while(x<0) x=x+64;
 		while(x>=64) x=x-64;
 		while(y<0) y=y+24;
@@ -254,21 +256,56 @@ public class HatFrame {
 		sideBrim = runFromString(raw,295,256*6);		
 	}
 	
+	private List<Integer> getBrimRectangle(int x, int y) {
+		List<Integer> ret = new ArrayList<>();
+		for(int xx=0;xx<32;++xx) {
+			for(int yy=7;yy>=0;--yy) {
+				// Notice the -1 X offset
+				ret.add(getSideBrimPixel(x+xx-1,y+yy));
+			}
+		}
+		return ret;
+	}
+	
 	private List<Integer> getRectangle(int x, int y) {
 		List<Integer> ret = new ArrayList<>();
 		for(int xx=31;xx>=0;--xx) {
 			for(int yy=7;yy>=0;--yy) {
-				ret.add(sideBrim[(yy+y)*64+(xx+x)]);
+				ret.add(getSideBrimPixel(x+xx,y+yy));				
 			}
 			--xx;
 			for(int yy=0;yy<8;++yy) {
-				ret.add(sideBrim[(yy+y)*64+(xx+x)]);
+				ret.add(getSideBrimPixel(x+xx,y+yy));	
 			}
 		}
 		return ret;
 	}
 	
 	public int[] getBinary(boolean cpuA) {
+		
+		/* 
+		   Flexible grids:
+		   AB
+		   CD
+		      +-+   
+		      | ^
+	          | |	 
+		      | | 
+		    --+ O	 
+		         
+		         
+		   Brim grid:
+		   AB (offset to left of flex grids by one horizontal pixel)	
+		   +-+
+		   ^ |
+		   | |
+		   | |
+		   O +--
+		   
+		   Top:
+		   TODO
+		 */
+		
 		List<Integer> data = new ArrayList<Integer>();		
 		
 		if(cpuA) {
@@ -286,9 +323,9 @@ public class HatFrame {
 			// The brim may be different
 			
 			// B1 256 left brim
-			data.addAll(getRectangle(0,16));
+			data.addAll(getBrimRectangle(0,16));
 			// B2 256 right brim
-			data.addAll(getRectangle(32,16));
+			data.addAll(getBrimRectangle(32,16));
 			
 			// B3  54 top edges
 			//  202 00s
