@@ -3,10 +3,10 @@ CON
   _xinfreq        = 5_000_000
 
 CON    
-    pinS1   = 19
-    pinS2   = 20
-    pinS3   = 21
-    pinS4   = 22
+    pinS1   = 19    ' Purple
+    pinS2   = 20    ' White
+    pinS3   = 21    ' Yellow
+    pinS4   = 22    ' Gray
     '
     pinCS   = 24
     pinDI   = 25
@@ -35,6 +35,48 @@ VAR
 
     long bufferOffset
     long bufferNextOffset
+
+PUB mainTest
+
+  outa[pinS1] := 0
+  dira[pinS1] := 1
+
+
+  PauseMSec(2000) ' For development ... give time to switch to terminal   
+  PST.start(115200)
+
+  STRIPA.draw(2, @TESTPALETTE, @TESTBUFFER, pinS1, 256)
+  'STRIPB.draw(2, @TESTPALETTE, @TESTBUFFER, pinS2, 256)
+  'STRIPC.draw(2, @TESTPALETTE, @TESTBUFFER, pinS3, 256)
+  'STRIPD.draw(2, @TESTPALETTE, @TESTBUFFER, pinS4, 256)
+
+  repeat
+
+DAT
+
+TESTPALETTE
+  long %00_00_00_00
+  long %00_00_10_00
+  long %00_10_00_00
+
+TESTBUFFER
+
+  byte 1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,1,1,0,2,2
 
 PUB Main | i
 
