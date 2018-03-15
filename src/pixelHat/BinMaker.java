@@ -26,10 +26,10 @@ public class BinMaker {
 	
 	public static byte[] fourByteNumber(long number) {
 		byte [] ret = new byte[4];
-		ret[0] = (byte) ((number>>24) & 0xFF);
-		ret[1] = (byte) ((number>>16) & 0xFF);
-		ret[2] = (byte) ((number>>8) & 0xFF);
-		ret[3] = (byte) ((number) & 0xFF);
+		ret[3] = (byte) ((number>>24) & 0xFF);
+		ret[2] = (byte) ((number>>16) & 0xFF);
+		ret[1] = (byte) ((number>>8) & 0xFF);
+		ret[0] = (byte) ((number) & 0xFF);
 		return ret;
 	}
 
