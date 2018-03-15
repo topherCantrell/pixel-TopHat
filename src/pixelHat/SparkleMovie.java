@@ -35,13 +35,13 @@ public class SparkleMovie {
 					}
 				}
 				for(int g=0;g<8;++g) {
-					pixels[sf+g][pix] = color*8+g+1; // Fade on
+					pixels[sf+g][pix] = color*8+(7-g)+1; // Fade in
 				}
 				for(int g=0;g<8;++g) {
-					pixels[sf+g+8][pix] = color; // Hold
+					pixels[sf+g+8][pix] = color*8+1; // Hold
 				}
 				for(int g=0;g<8;++g) {
-					pixels[sf+g+16][pix] = color*8+(7-g)+1; // Fade out
+					pixels[sf+g+16][pix] = color*8+g+1; // Fade on
 				}
 				break;
 			}
