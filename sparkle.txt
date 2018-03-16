@@ -1,6 +1,6 @@
 ; Pause between frames
 
-delay 50
+delay 100
 
 ; Colors
 

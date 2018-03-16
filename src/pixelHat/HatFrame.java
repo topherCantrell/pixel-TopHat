@@ -125,17 +125,15 @@ public class HatFrame {
 	};
 	
 	public void setSideBrimPixel(int x, int y, int color) {
+		if(y<0 || y>23) return;
 		while(x<0) x=x+64;
-		while(x>=64) x=x-64;
-		while(y<0) y=y+24;
-		while(y>=24) y=y-24;
+		while(x>63) x=x-64;
 		sideBrim[y*64+x] = color;
 	}
 	public int getSideBrimPixel(int x, int y) {
+		if(y<0 || y>23) return 0;
 		while(x<0) x=x+64;
-		while(x>=64) x=x-64;
-		while(y<0) y=y+24;
-		while(y>=24) y=y-24;
+		while(x>63) x=x-64;
 		return sideBrim[y*64+x];
 	}
 	
@@ -164,7 +162,7 @@ public class HatFrame {
 	}
 	public void drawSprite(int x, int y, int [][] sprite) {
 		for(int yy=0;yy<sprite.length;++yy) {
-			for(int xx=0;xx<sprite[y].length;++xx) {
+			for(int xx=0;xx<sprite[yy].length;++xx) {
 				setSideBrimPixel(x+xx,y+yy,sprite[yy][xx]);
 			}
 		}		

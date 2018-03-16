@@ -1,10 +1,8 @@
 CON
   _clkmode        = xtal1 + pll16x
-  _xinfreq        = 5_000_000
+  _xinfreq        = 5_000_000            
 
 CON
-
-    I_AM_MASTER = 1
 
     pinS1   = 19    ' Purple
     pinS2   = 20    ' White
@@ -16,8 +14,9 @@ CON
     pinSCLK = 26
     pinDO   = 27
 
-    pinWEBIN = 10 ' Green
-    pinSYNC  = 11 ' Brown
+    pinWEBIN    = 10 ' Green
+    pinSYNCout  = 11 ' Brown
+    pinSYNCin   =  0 
 
 OBJ    
     STRIPA   : "NeoPixelStrip"
@@ -42,13 +41,18 @@ VAR
     long bufferOffset
     long bufferNextOffset
 
-    long syncSignal
+    long syncSignalMy 
+    long syncSignalOther
 
 PUB mainTest | i
-
-  ' DO NOT run the same I_AM_MASTER setting on both nodes
-  ' PLEASE be careful
-  initSync
+  
+  dira[pinSYNCout] := 1
+  outa[pinSYNCout] := 0
+   
+  dira[pinSYNCin] := 0
+  
+  syncSignalMy := 0
+  syncSignalOther := 0
 
   ' Drive the data lines low to start
   outa[pinS1] := 0
@@ -58,26 +62,32 @@ PUB mainTest | i
   outa[pinS3] := 0
   dira[pinS3] := 1
   outa[pinS4] := 0
-  dira[pinS4] := 1
-
-  PauseMSec(2000) ' For development ... give time to switch to terminal   
-  PST.start(115200)
+  dira[pinS4] := 1    
 
   STRIPA.init
   STRIPB.init
   STRIPC.init
   STRIPD.init
+  
+  STRIPA.draw(2, @BLANKPIX, @BLANKPIX, pinS1, 256)
+  STRIPB.draw(2, @BLANKPIX, @BLANKPIX, pinS2, 256)
+  STRIPC.draw(2, @BLANKPIX, @BLANKPIX, pinS3, 256)
+  STRIPD.draw(2, @BLANKPIX, @BLANKPIX, pinS4, 256)
+
+  PauseMSec(1000) ' For development ... give time to switch to terminal   
+  PST.start(115200)
 
   ' frameBuffer used for scratch during the startup process
-  SD.start(@frameBuffer, pinDO, pinSCLK, pinDI, pinCS)
-
+  i := SD.start(@frameBuffer, pinDO, pinSCLK, pinDI, pinCS)
+  SD.waitForDone
+      
   ' Map of all animations on the disk
   SD.readFileSectors(@animationMap,0,1)
-  SD.waitForDone   
-  
+  SD.waitForDone
+    
   ' First animation starts in the next sector
   currentSector := 1
-
+  
   repeat  
     
     SD.waitForDone ' We might be in the middle of a cache operation from below
@@ -91,8 +101,7 @@ PUB mainTest | i
     currentDelay := long[@movieConfig+4]
 
     if currentFrameCount == 0
-      ' End of all animations -- restart at the beginning of the disk
-      PST.char($30)
+      ' End of all animations -- restart at the beginning of the disk)
       currentSector := 1      
       next
 
@@ -124,17 +133,19 @@ PUB mainTest | i
       ' Start loading the next frame in the back buffer
       SD.waitForDone ' Hopefully this never waits (long delay coming up)          
       SD.readFileSectors(@frameBuffer+bufferNextOffset,currentSector,2)
-      currentSector := currentSector + 2                       
+      currentSector := currentSector + 2          
 
+      ' Make sure the two CPUs draw at the same time
+      syncToOther
+      
       ' Draw the current frame
       STRIPA.draw(2, @colorPalette, @frameBuffer    +bufferOffset, pinS1, 256)
       STRIPB.draw(2, @colorPalette, @frameBuffer+256+bufferOffset, pinS2, 256)
       STRIPC.draw(2, @colorPalette, @frameBuffer+512+bufferOffset, pinS3, 256)
-      STRIPD.draw(2, @colorPalette, @frameBuffer+768+bufferOffset, pinS4, 256)
-
-      ' Now for a long delay between frames (the SD should complete here)
+      STRIPD.draw(2, @colorPalette, @frameBuffer+768+bufferOffset, pinS4, 256)  
+      
       PauseMSec(currentDelay)
-
+        
       ' Count the frames      
       currentFrameCount := currentFrameCount - 1
       if currentFrameCount == 0
@@ -146,41 +157,33 @@ PUB mainTest | i
       i := bufferOffset
       bufferOffset := bufferNextOffset
       bufferNextOffset := i
- 
-'pri dumpSD(p) | i
-'
-'  repeat i from 0 to 15
-'    PST.hex(byte[p+i],2)
-'    PST.char(32)       
 
-pri initSync
-  return
-'  if I_AM_MASTER
-'    dira[pinSYNC] := 1
-'    outa[pinSYNC] := 0
-'    syncSignal := 0
-'    PauseMSec(500) ' Give the other CPU time to reach this point
-'    syncWithOther  ' Try the sync function
-'  else
-'    dira[pinSYNC] := 0
-'    syncSignal := 0
-'    PauseMSec(500) ' Give the other CPU time to reach this point
-'    syncWithOther  ' Try the sync function  
+pri syncToOther | i
   
-pri syncWithOther | i
-  return
-'  if I_AM_MASTER
-'    if syncSignal==1
-'      syncSignal:=0
-'    else
-'      syncSignal:=1
-'    outa[pinSYNC] := syncSignal
-'  else
-'    repeat
-'      i := ina[pinSYNC]
-'      if i<>syncSignal
-'        syncSignal := i
-'        quit
+  ' Flip our sync output
+  if syncSignalMy == 1
+    syncSignalMy := 0
+  else
+    syncSignalMy := 1
+  outa[pinSYNCout] := syncSignalMy
+
+  'PST.str(string("Flipped my sync to "))
+  'PST.hex(syncSignalMy,2)
+  'PST.char(13)
+  
+  'PST.str(string("Waiting for other ..."))
+  
+  ' Now wait for the input to flip
+  repeat while ina[pinSYNCin] == syncSignalOther
+  
+  'PST.str(string(" ... flipped.",13))
+  syncSignalOther := ina[pinSYNCin]
+ 
+pri dumpSD(p) | i
+
+  repeat i from 0 to 8
+    PST.hex(byte[p+i],2)
+    PST.char(32)       
 
 PRI strCmp(a,b)
 ' Compare two strings. Return 1 if the same or 0 if not  
@@ -204,3 +207,23 @@ PRI getAnimationSector | i
      
 PRI PauseMSec(Duration)
   waitcnt(((clkfreq / 1_000 * Duration - 3932) #> 381) + cnt)
+
+dat
+
+BLANKPIX
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 

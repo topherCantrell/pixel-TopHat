@@ -36,8 +36,8 @@ public class BinMaker {
 	public static void main(String[] args) throws Exception {
 		
 		List<String> lines = readFile("master.txt");
-		if(lines.size()>31) {
-			throw new RuntimeException("Limited to 31 animations for now");
+		if(lines.size()>30) {
+			throw new RuntimeException("Limited to 30 animations for now");
 		}
 		
 		List<Movie> movies = new ArrayList<Movie>();
@@ -52,8 +52,13 @@ public class BinMaker {
 		
 		// One sector for mapping
 		
+		byte [] pre = {'2','0','1','8',0,0,0,0, 0,0,0,0,0,0,0,1};
+		osA.write(pre);
+		pre[15] = 2;
+		osB.write(pre);		
+		
 		int currentSector = 1;		
-		for(int ent=0;ent<32;++ent) {
+		for(int ent=0;ent<31;++ent) {
 			byte [] data = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 			if(ent<movies.size()) {
 				Movie m = movies.get(ent);
