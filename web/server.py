@@ -20,7 +20,12 @@ import serial
 class CGIHandler(tornado.web.RequestHandler):
     def get(self,first):        
         self.write(":"+first+":")
-        ser.write(bytes(first+"\n"))
+        ser.write(bytes(first+"\x0D"))        
+        ' /r = CR 0x0D'
+        ' /n = LF 0x0A'
+        ' Windows sends 0x0D, 0x0A'
+        ' Linux sends 0x0A'
+        ' The ParallaxSerialTerminal is watching for 0x0D. Sigh. We send that manually.'
 
 #ser = serial.Serial('COM9',115200)
 ser = serial.Serial('/dev/serial0',115200)
