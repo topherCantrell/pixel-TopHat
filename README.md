@@ -66,9 +66,9 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 
 # Circuit
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic1.jpg">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure1.png">
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/schematic2.jpg">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure2.png">
 
 # Web Interface
 
@@ -121,4 +121,6 @@ starts with a 0 ends the list.
 
 # Software
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/cogs.jpg">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure3.png">
+
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure4.png">
