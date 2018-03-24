@@ -4,6 +4,8 @@ CON
 
 CON
 
+    USE_WEB     =   0
+
     pinWEBIN    =   0 ' From Pi0 to both CPUs
     pinWEBOUT   =   2 ' Not actually connected
 
@@ -50,7 +52,7 @@ VAR
     long startCurrentMovie    ' In case we need to repeat a movie
     long currentColorMult
 
-PUB mainTest | i, j
+PUB main | i, j
 
   ' Initialize the sync
   dira[pinSYNCout] := 1
@@ -76,24 +78,31 @@ PUB mainTest | i, j
   STRIPD.init
 
   ' Blank all pixels
+  STRIPA.draw(2, @BLANKGREEN, @BLANKPIX, pinS1, 256)
+  STRIPB.draw(2, @BLANKGREEN, @BLANKPIX, pinS2, 256)
+  STRIPC.draw(2, @BLANKGREEN, @BLANKPIX, pinS3, 256)
+  STRIPD.draw(2, @BLANKGREEN, @BLANKPIX, pinS4, 256)
+    
+  PauseMSec(2000) ' For development - give user time to switch to terminal
+
+  ' Blank all pixels
   STRIPA.draw(2, @BLANKPIX, @BLANKPIX, pinS1, 256)
   STRIPB.draw(2, @BLANKPIX, @BLANKPIX, pinS2, 256)
   STRIPC.draw(2, @BLANKPIX, @BLANKPIX, pinS3, 256)
   STRIPD.draw(2, @BLANKPIX, @BLANKPIX, pinS4, 256)
     
-  PauseMSec(1000) ' For development - give user time to switch to terminal
-    
   PST.start(115200)
 
-  PST.str(string("PixelHat 2018",13))
+  PST.str(string("PixelHat 2018-1",13))
+
+  if USE_WEB==1
+    PST.str(string("Fixed wait time for PiZero ...............................................................|",13))   
+    repeat i from 1 to 90 ' 90 seconds
+      PauseMSec(1000)    
+      PST.char($2E)
+    PST.str(string(13,"Done waiting for PiZero.",13))                       
   
-  PST.str(string("Fixed wait time for PiZero ...............................................................|",13))   
-  repeat i from 1 to 90 ' 90 seconds
-    PauseMSec(1000)    
-    PST.char($2E)
-  PST.str(string(13,"Done waiting for PiZero.",13))                       
-  
-  WEB.StartRxTx(pinWEBIN, pinWEBOUT, 0, 115200)
+    WEB.StartRxTx(pinWEBIN, pinWEBOUT, 0, 115200)
 
   ' frameBuffer used for scratch during the startup process
   i := SD.start(@frameBuffer, pinDO, pinSCLK, pinDI, pinCS)
@@ -157,26 +166,27 @@ PUB mainTest | i, j
       showError(string("DISK ERROR 5"),i)
 
     repeat    
-      
-      ' Check for serial command      
-      if WEB.RxCount > 0
-        PST.str(string("Waiting on rest of line ... "))
-        WEB.StrIn(@movieConfig)
-        j := byte[@movieConfig]
-        if j=>$30 and j=<$39
-          ' This is a brightness command
-          currentColorMult := j - $30
-          PST.str(string(" ... setting brightness to "))
-          PST.hex(currentColorMult,2)
-          PST.char(13)
-          adjustColors
-        else
-          ' Switch to new movie
-          PST.str(string(" ... got:"))
-          PST.str(@movieConfig)
-          PST.str(string(":",13))
-          currentSector := getAnimationSector(@movieConfig)
-          quit          
+
+      if USE_WEB==1
+        ' Check for serial command      
+        if WEB.RxCount > 0
+          PST.str(string("Waiting on rest of line ... "))
+          WEB.StrIn(@movieConfig)
+          j := byte[@movieConfig]
+          if j=>$30 and j=<$39
+            ' This is a brightness command
+            currentColorMult := j - $30
+            PST.str(string(" ... setting brightness to "))
+            PST.hex(currentColorMult,2)
+            PST.char(13)
+            adjustColors
+          else
+            ' Switch to new movie
+            PST.str(string(" ... got:"))
+            PST.str(@movieConfig)
+            PST.str(string(":",13))
+            currentSector := getAnimationSector(@movieConfig)
+            quit          
              
       ' Start loading the next frame in the back buffer
       i:=SD.waitForDone ' Hopefully this never waits (long delay coming up)
@@ -186,7 +196,7 @@ PUB mainTest | i, j
       currentSector := currentSector + 2          
 
       ' Make sure the two CPUs draw at the same time
-      syncToOther
+      syncToOther            
       
       ' Draw the current frame
       STRIPA.draw(2, @adjustedColors, @frameBuffer    +bufferOffset, pinS1, 256)
@@ -309,10 +319,13 @@ colorMult
 
 ERRCOLLORS
   long $00_00_00_00
-  long $00_00_00_10
-  long $00_00_10_00
-  long $00_10_00_00
-  long $00_10_10_10
+  long $00_00_00_40
+  long $00_00_40_00
+  long $00_40_00_00
+  long $00_40_40_40
+
+BLANKGREEN
+  long $00_02_00_00
 
 BLANKPIX
   byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
