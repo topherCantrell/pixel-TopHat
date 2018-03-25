@@ -17,8 +17,8 @@ public class StillMovie {
 		
 		HatFrame f = new HatFrame();
 		
-		f.drawSprite(32-15, 1, ghost);		
-		f.drawSprite(32+1,2,pac);
+		f.drawSprite(32-15+32, 1, ghost);		
+		f.drawSprite(32+1+32,2,pac);
 		
 		f.setRing(0, 4);
 		f.setRing(1, 5);

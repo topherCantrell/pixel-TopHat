@@ -19,7 +19,9 @@ import serial
         
 class CGIHandler(tornado.web.RequestHandler):
     def get(self,first):        
-        self.write(":"+first+":")
+        first = first.lower()        
+        self.write(":"+first+":")        
+        
         ser.write(bytes(first+"\x0D"))        
         ' /r = CR 0x0D'
         ' /n = LF 0x0A'

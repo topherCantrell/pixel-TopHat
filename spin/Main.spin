@@ -4,7 +4,7 @@ CON
 
 CON
 
-    USE_WEB     =   0
+    USE_WEB     =   1
 
     pinWEBIN    =   0 ' From Pi0 to both CPUs
     pinWEBOUT   =   2 ' Not actually connected

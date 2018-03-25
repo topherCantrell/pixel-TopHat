@@ -31,7 +31,7 @@ def readMovie(filename):
             g = g[1:].replace('_','')
             ret["colors"].append(int(g,16))
         if g.startswith("delay "):
-            ret["delay"] = int(g[6])
+            ret["delay"] = int(g[6:])
             
     fs = ''
     while True:
@@ -44,10 +44,17 @@ def readMovie(filename):
         fs = fs + lines[pos]
         pos += 1
         
-    return ret
-            
+    return ret            
         
-
+def fourByteNumber(number):
+    ret = b'';
+    ret = ret + ( chr(number & 0xFF).encode('ascii') )
+    ret = ret + ( chr((number>>8) & 0xFF).encode('ascii') )
+    ret = ret + ( chr((number>>16) & 0xFF).encode('ascii') )
+    ret = ret + ( chr((number>>24) & 0xFF).encode('ascii') )
+    return ret
+    
+    
     
     
 master = readLines("../master.txt")
@@ -55,4 +62,66 @@ master = readLines("../master.txt")
 movies = []
 for m in master:
     movies.append(readMovie(m))
+    
+binA = open("aPY.bin","wb")
+binB = open("bPY.bin","wb")
+
+preA = b'2018\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
+binA.write(preA)
+
+preB = b'2018\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02'
+binB.write(preB)
+
+currentSector = 1
+for ent in range(0,31):   
+    dt = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+    if ent < len(movies):
+        m = movies[ent]
+        dt = b''
+        for x in range(0,12):
+            if x<len(m["name"]):
+                dt = dt + bytes(m["name"][x].encode('ascii'))
+            else:
+                dt = dt + b'\x00'
+        dt = dt + fourByteNumber(currentSector);        
+        currentSector = currentSector + 3 + len(m["frames"])*2;    
+    binA.write(dt)
+    binB.write(dt)
+    
+for m in movies:
+    # Write 1 sector info NUMFRAMES,DELAY
+    dt = fourByteNumber(len(m["frames"]))
+    binA.write(dt)
+    binB.write(dt)
+    dt = fourByteNumber(m["delay"])
+    binA.write(dt);
+    binB.write(dt);    
+    for x in range(0,512-8):
+        binA.write(b'\x00');
+        binB.write(b'\x00');
+    
+    # Write 2 sectors colors
+    for x in range(0,256):
+        if x<len(m["colors"]):
+            dt = fourByteNumber(m["colors"][x])
+        else:
+            dt = fourByteNumber(0)
+        binA.write(dt);
+        binB.write(dt);
+        
+    for f in m["frames"]:
+        d = f.get_binary(True)
+        if len(d)!=1024:
+            raise Exception("Size")
+        binA.write(d)
+        d = f.get_binary(False)
+        #if len(d)!=1024:
+        #    raise Exception("Size")
+        binB.write(d)
+
+binA.flush()
+binA.close()
+binB.flush()
+binB.close()
+
     

@@ -77,5 +77,25 @@ public class SpriteLoader {
 		}
 		return ret;
 	}
+	
+	public int[][] flipLeftRight(int[][] colorSprite) {
+		int [][] ret = new int[colorSprite.length][colorSprite[0].length];
+		for(int y=0;y<colorSprite.length;++y) {
+			for(int x=0;x<colorSprite[y].length;++x) {
+				ret[y][colorSprite[y].length-x-1] = colorSprite[y][x];
+			}
+		}
+		return ret;
+	}
+
+	public int[][] flipUpDown(int[][] colorSprite) {
+		int [][] ret = new int[colorSprite.length][];
+		int i = ret.length-1;
+		for(int x=0;x<colorSprite.length;++x) {
+			ret[i] = colorSprite[x];
+			--i;
+		}		
+		return ret;
+	}
 
 }
