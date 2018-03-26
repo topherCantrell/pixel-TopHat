@@ -95,14 +95,16 @@ PUB main | i, j
 
   PST.str(string("PixelHat 2018-1",13))
 
+  {
   if USE_WEB==1
     PST.str(string("Fixed wait time for PiZero ...............................................................|",13))   
     repeat i from 1 to 90 ' 90 seconds
       PauseMSec(1000)    
       PST.char($2E)
-    PST.str(string(13,"Done waiting for PiZero.",13))                       
+    PST.str(string(13,"Done waiting for PiZero.",13))
+    }                       
   
-    WEB.StartRxTx(pinWEBIN, pinWEBOUT, 0, 115200)
+  WEB.StartRxTx(pinWEBIN, pinWEBOUT, 0, 115200)
 
   ' frameBuffer used for scratch during the startup process
   i := SD.start(@frameBuffer, pinDO, pinSCLK, pinDI, pinCS)

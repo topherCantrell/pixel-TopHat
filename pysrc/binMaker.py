@@ -52,10 +52,7 @@ def fourByteNumber(number):
     ret = ret + ( chr((number>>8) & 0xFF).encode('ascii') )
     ret = ret + ( chr((number>>16) & 0xFF).encode('ascii') )
     ret = ret + ( chr((number>>24) & 0xFF).encode('ascii') )
-    return ret
-    
-    
-    
+    return ret    
     
 master = readLines("../master.txt")
 
