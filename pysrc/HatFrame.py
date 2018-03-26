@@ -111,22 +111,24 @@ class HatFrame:
     ]
     
     
-    def __init__(self,raw):
+    def __init__(self,raw=None):
         self.topEdges = [0] * (27+27)
         self.topRing =  [0] * 241
-        self.sideBrim = [0] * (256*6)                               
+        self.sideBrim = [0] * (256*6)
         
-        raw = raw.replace("-", "")
-        raw = raw.replace("|", "")
-        raw = raw.replace(" ", "")
-        raw = raw.replace("..", "00")                
+        if raw != None:            
         
-        if len(raw)!=1831*2:
-            raise Exception("Invalid frame text representation")        
-                
-        self.topEdges = self._run_from_string(raw,0,54)
-        self.topRing = self._run_from_string(raw,54,241)
-        self.sideBrim = self._run_from_string(raw,295,256*6)               
+            raw = raw.replace("-", "")
+            raw = raw.replace("|", "")
+            raw = raw.replace(" ", "")
+            raw = raw.replace("..", "00")                
+            
+            if len(raw)!=1831*2:
+                raise Exception("Invalid frame text representation")        
+                    
+            self.topEdges = self._run_from_string(raw,0,54)
+            self.topRing = self._run_from_string(raw,54,241)
+            self.sideBrim = self._run_from_string(raw,295,256*6)               
         
     def set_side_brim_pixel(self,x,y,color):
         if y<0 or y>23:
@@ -154,7 +156,7 @@ class HatFrame:
         else:
             self.sideBrim[p-295] = color
     
-    def set_pixel(self,p):
+    def get_pixel(self,p):
         if p<54:
             return self.topEdges[p]
         elif p<295:
@@ -163,16 +165,16 @@ class HatFrame:
             return self.sideBrim[p-295]
         
     def set_line(self,n,color):        
-        for p in RINGS[n]:
+        for p in HatFrames.LINES[n]:
             self.set_pixel(p+295,color)
     
     def set_ring(self,n,color):
-        for p in LINES[n]:
+        for p in HatFrame.RINGS[n]:
             self.set_pixel(p+295,color)
     
     def draw_sprite(self,x,y, sprite):
-        for yy in xrange(0,len(sprite)):
-            for xx in xrange(0,len(sprite[yy])):
+        for yy in range(0,len(sprite)):
+            for xx in range(0,len(sprite[yy])):
                 self.set_side_brim_pixel(x+xx,y+yy,sprite[yy][xx])
                 
     def _data_run(self, data,pos,count):
