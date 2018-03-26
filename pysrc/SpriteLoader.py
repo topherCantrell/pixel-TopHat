@@ -46,7 +46,15 @@ class SpriteLoader:
         return ret
     
     def doubler(self,colorSprite):
-        pass
+        ret =[]
+        for y in range(0,len(colorSprite)):
+            drow = []
+            for x in range(0,len(colorSprite[y])):
+                drow.append(colorSprite[y][x])
+                drow.append(colorSprite[y][x])
+            ret.append(drow)
+            ret.append(drow)            
+        return ret
     
     def flipLeftRight(self,colorSprite):
         pass

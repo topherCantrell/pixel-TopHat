@@ -30,6 +30,7 @@ public class InvadersMovie {
 			ps.println(f.toString());
 		}
 		
+		
 		for(int x=0;x<64;++x) {
 			HatFrame f = new HatFrame();
 			int ofs = x%2;
@@ -49,7 +50,7 @@ public class InvadersMovie {
 			ps.println("%");
 			ps.println(f.toString());
 		}
-		
+				
 		ps.flush();
 		ps.close();
 
