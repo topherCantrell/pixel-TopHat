@@ -162,11 +162,13 @@ class HatFrame:
         else:
             return self.sideBrim[p-295]
         
-    def set_line(self,n,color):
-        raise Exception("Implement me")
+    def set_line(self,n,color):        
+        for p in RINGS[n]:
+            self.set_pixel(p+295,color)
     
     def set_ring(self,n,color):
-        raise Exception("Implement me")
+        for p in LINES[n]:
+            self.set_pixel(p+295,color)
     
     def draw_sprite(self,x,y, sprite):
         for yy in xrange(0,len(sprite)):
