@@ -8,7 +8,7 @@ public class SparkleMovie {
 	public static void main(String[] args) throws Exception {
 		
 		Random r = new Random();
-		
+				
 		// 1831 possible
 		// Ten frames per second
 		// Twenty seconds = 200 frames
@@ -22,18 +22,20 @@ public class SparkleMovie {
 		int [][] pixels = new int[200][1831];
 		
 		for(int z=0;z<2000;++z) {			
-			outer:
 			while(true) {
 				int color = r.nextInt(6)+1; // 1..7
 				int pix = r.nextInt(1831);
 				int sf = r.nextInt(200-24);
 				
-				System.out.println(pix+" "+color+" "+sf);
+				//System.out.println(pix+" "+color+" "+sf);
+				boolean ok = true;
 				for(int g=sf;g<sf+24;++g) {
 					if(pixels[g][pix]!=0) {
-						continue outer;
+						ok = false;
+						break;
 					}
 				}
+				if(!ok) continue;
 				for(int g=0;g<8;++g) {
 					pixels[sf+g][pix] = color*8+(7-g)+1; // Fade in
 				}
@@ -53,7 +55,7 @@ public class SparkleMovie {
 			for(int x=0;x<1831;++x) {
 				if(pixels[z][x]!=0) ++cnt;
 			}
-			System.out.println(z+" "+cnt);
+			//System.out.println(z+" "+cnt);
 			if(cnt>max) max=cnt;
 		}
 		
