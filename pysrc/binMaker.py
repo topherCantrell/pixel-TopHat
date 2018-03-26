@@ -13,7 +13,12 @@ def readLines(filename):
     return ret
 
 def readMovie(filename):    
-    ret = {"colors" : [], "delay" : 0, "frames" : [], "name" : ''}
+    ret = {
+        "colors" : [], 
+        "delay" : 0, 
+        "frames" : [], 
+        "name" : ''
+    }
     
     i = filename.index(".")
     ret["name"] = filename[0:i]
@@ -46,13 +51,14 @@ def readMovie(filename):
         
     return ret            
         
-def fourByteNumber(number):
-    ret = b'';
-    ret = ret + ( chr(number & 0xFF).encode('ascii') )
-    ret = ret + ( chr((number>>8) & 0xFF).encode('ascii') )
-    ret = ret + ( chr((number>>16) & 0xFF).encode('ascii') )
-    ret = ret + ( chr((number>>24) & 0xFF).encode('ascii') )
-    return ret    
+def fourByteNumber(number):    
+    by = [number & 0xFF, 
+          (number>>8) & 0xFF, 
+          (number>>16) & 0xFF,
+          (number>>24) & 0xFF
+         ]
+    return bytes(by)
+        
     
 master = readLines("../master.txt")
 

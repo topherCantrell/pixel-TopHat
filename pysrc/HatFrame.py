@@ -124,9 +124,9 @@ class HatFrame:
         if len(raw)!=1831*2:
             raise Exception("Invalid frame text representation")        
                 
-        topEdges = self._run_from_string(raw,0,54)
-        topRing = self._run_from_string(raw,54,241)
-        sideBrim = self._run_from_string(raw,295,256*6)                
+        self.topEdges = self._run_from_string(raw,0,54)
+        self.topRing = self._run_from_string(raw,54,241)
+        self.sideBrim = self._run_from_string(raw,295,256*6)               
         
     def set_side_brim_pixel(self,x,y,color):
         if y<0 or y>23:
@@ -175,19 +175,20 @@ class HatFrame:
                 
     def _data_run(self, data,pos,count):
         ret = ''
-        for x in xrange(pos,pos+count):
-            v = int(data[x],16).toupper()
+        for x in range(pos,pos+count):
+            v = hex(data[x])[2:].upper()
             if len(v)==1:
                 v = "0"+v
             if v=='00':
                 v = '..'
             ret = ret + v + " "
+        return ret
             
     def to_string(self):
         ret = "----------------------------------------------------------\n"
         ret = ret + self._data_run(self.topEdges,0,27)
         ret = ret + "; 27\n"
-        ret = ret + self._data_Run(self.topEdges,27,27)
+        ret = ret + self._data_run(self.topEdges,27,27)
         ret = ret + "; 27\n"
         ret = ret + "----------------------------------------------------------\n"
         # Ring
@@ -212,8 +213,8 @@ class HatFrame:
         i = i + 60
         ret = ret + "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
         # SideBrim
-        for y in xrange(0,24):            
-            v = self._data_run(sideBrim,y*64,64)
+        for y in range(0,24):            
+            v = self._data_run(self.sideBrim,y*64,64)
             v = v[0:96]+"| "+v[96:]
             if y==8 or y==16:
                 ret = ret + "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"            
@@ -291,7 +292,10 @@ class HatFrame:
             ret = ret + self._get_brim_rectangle(0,16)
             ret = ret + self._get_brim_rectangle(32,16)
             
-            # TODO top edges
-            # TODO top ring
+            ret = ret + bytes(self.topEdges)
+            ret = ret + b'\x00' * 202
+            
+            ret = ret + bytes(self.topRing)
+            ret = ret + b'\x00' * 15
         
         return ret
