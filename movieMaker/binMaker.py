@@ -1,23 +1,23 @@
 import HatFrame
 
 def readLines(filename):
-    f = open(filename,"r")
-    lines = f.read().split("\n")
-    ret = []
-    for line in lines:
-        if ';' in line:
-            i = line.index(';')
-            line = line[0:i]
-        if len(line)>0:
-            ret.append(line)    
-    return ret
+    with open(filename,"r") as f:
+        lines = f.read().split("\n")
+        ret = []
+        for line in lines:
+            if ';' in line:
+                i = line.index(';')
+                line = line[0:i]
+            if len(line)>0:
+                ret.append(line)    
+        return ret
 
 def readMovie(filename):    
     ret = {
         "colors" : [], 
-        "delay" : 0, 
+        "delay"  : 0, 
         "frames" : [], 
-        "name" : ''
+        "name"   : ''
     }
     
     i = filename.index(".")
@@ -92,6 +92,7 @@ for ent in range(0,31):
     binB.write(dt)
     
 for m in movies:
+    print(m["name"])
     # Write 1 sector info NUMFRAMES,DELAY
     dt = fourByteNumber(len(m["frames"]))
     binA.write(dt)
@@ -118,13 +119,11 @@ for m in movies:
             raise Exception("Size")
         binA.write(d)
         d = f.get_binary(False)
-        #if len(d)!=1024:
-        #    raise Exception("Size")
+        if len(d)!=1024:
+            raise Exception("Size "+str(len(d)))
         binB.write(d)
 
 binA.flush()
 binA.close()
 binB.flush()
 binB.close()
-
-    

@@ -234,20 +234,7 @@ class HatFrame:
             ret[x] = int(s[binOffset+x*2:binOffset+x*2+2],16)      
         return ret    
   
-    def _get_rectangle(self,x,y):
-        '''
-        List<Integer> ret = new ArrayList<>();
-        for(int xx=31;xx>=0;--xx) [
-            for(int yy=7;yy>=0;--yy) [
-                ret.add(getSideBrimPixel(x+xx,y+yy));                
-            ]
-            --xx;
-            for(int yy=0;yy<8;++yy) [
-                ret.add(getSideBrimPixel(x+xx,y+yy));    
-            ]
-        ]
-        return ret;
-        '''
+    def _get_rectangle(self,x,y):        
         ret = b''
         
         for xx in range(31,-1,-2):
@@ -258,22 +245,7 @@ class HatFrame:
                 ret = ret + chr(self.get_side_brim_pixel(x+xx,y+yy)).encode('ascii')         
         return ret
     
-    def _get_brim_rectangle(self,x,y):
-        '''
-        List<Integer> ret = new ArrayList<>();
-        for(int xx=0;xx<32;++xx) [
-            for(int yy=7;yy>=0;--yy) [
-                # Notice the -1 X offset
-                ret.add(getSideBrimPixel(x+xx-1,y+yy));
-            ]
-            ++xx;
-            for(int yy=0;yy<8;++yy) [
-                # Notice the -1 X offset
-                ret.add(getSideBrimPixel(x+xx-1,y+yy));
-            ]
-        ]
-        return ret;
-        '''        
+    def _get_brim_rectangle(self,x,y):        
         ret = b''
         for xx in range(0,32,2):
             for yy in range(7,-1,-1):
@@ -294,11 +266,9 @@ class HatFrame:
             ret = ret + self._get_rectangle(32,8)        
         else:
             ret = ret + self._get_brim_rectangle(0,16)
-            ret = ret + self._get_brim_rectangle(32,16)
-            
-            ret = ret + bytes(self.topEdges)
-            ret = ret + b'\x00' * 202
-            
+            ret = ret + self._get_brim_rectangle(32,16)            
+            ret = ret + bytes(self.topEdges)            
+            ret = ret + b'\x00' * 202            
             ret = ret + bytes(self.topRing)
             ret = ret + b'\x00' * 15
         
