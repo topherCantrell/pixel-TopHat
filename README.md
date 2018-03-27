@@ -9,11 +9,11 @@ at Digikey.
 # Parts
 
 Four flexible grids for the body. $148<br>
-http://www.ebay.com/itm/282616038722
+http://www.ebay.com/itm/282616038722<br>
 From adafruit: https://www.adafruit.com/product/2294
 
 One pixel circle for the top. $48<br>
-http://www.ebay.com/itm/311923131692
+http://www.ebay.com/itm/311923131692<br>
 Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JV22TS/ref=sr_1_11
 
 Six meters of 144/m strips for the brim and fill for the top. $100.80<br>
