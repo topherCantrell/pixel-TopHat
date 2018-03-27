@@ -10,12 +10,15 @@ at Digikey.
 
 Four flexible grids for the body. $148<br>
 http://www.ebay.com/itm/282616038722
+From adafruit: https://www.adafruit.com/product/2294
 
 One pixel circle for the top. $48<br>
 http://www.ebay.com/itm/311923131692
+Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JV22TS/ref=sr_1_11
 
 Six meters of 144/m strips for the brim and fill for the top. $100.80<br>
 http://www.ebay.com/itm/222533276234
+From adafruit: https://www.adafruit.com/product/1506
 
 One DC/DC converter from Digikey. $36<br>
 https://www.digikey.com/product-detail/en/delta-electronics/E36SC05025NRFA/941-1638-ND/3995553
@@ -34,6 +37,9 @@ https://www.digikey.com/product-detail/en/rubycon/25PX1000MEFCT810X16/1189-1583-
 
 Two logic-level converters from Sparkfun. $6<br>
 https://www.sparkfun.com/products/12009
+
+Adhesive felt sheets from Amazon. $10<br>
+https://www.amazon.com/gp/product/B076P51CHW/ref=oh_aui_detailpage_o00_s00
 
 Contact cement, wires, etc.
 
