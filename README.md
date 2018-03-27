@@ -2,9 +2,7 @@
 
 A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
-Thanks to Gary Dion (http://garydion.com/). He helped  design the pixel layout,
-and he found all of the Neo Pixels on eBay. He also found the 5V DC converter 
-at Digikey.
+Much thanks to my buddy Gary Dion for suggestions and support.
 
 # Parts
 
@@ -38,6 +36,9 @@ https://www.digikey.com/product-detail/en/rubycon/25PX1000MEFCT810X16/1189-1583-
 Two logic-level converters from Sparkfun. $6<br>
 https://www.sparkfun.com/products/12009
 
+Pi Zero W from adafruit. $10<br>
+https://www.adafruit.com/product/3400
+
 Adhesive felt sheets from Amazon. $10<br>
 https://www.amazon.com/gp/product/B076P51CHW/ref=oh_aui_detailpage_o00_s00
 
@@ -46,14 +47,6 @@ Contact cement, wires, etc.
 I reused two propeller boards from a previous project:<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.sch<br>
 https://github.com/topherCantrell/snap/blob/master/SnapMidi/hardware/SnapMusic.pcb<br>
-
-# Power
-
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/power.jpg">
-
-# CPUs
-
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/cpus.jpg">
 
 # Construction
 
@@ -81,35 +74,6 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 The Pi Zero is configured as an access point. You connect to it with your phone and load the control page.
 
 <img src="https://github.com/topherCantrell/pixelHat/blob/master/art/web.jpg">
-
-# Animation Sequences
-
-## Pacman
-  - Line of all 4 ghosts chase Pacman around the brim a couple of times
-  - They get closer and closer
-  - A power pill appears
-  - Pacman eats it, they turn blue, and he truns to chase them eating them one by one
-  - The scores fly around the hat behind him
-  - They start flashing. Before he can eat the last one it changes.
-  - The ghost disappears and pacman dies.
-  
-## Mario
-  - Mario from Donkey Kong runs around the hat. There is no room for him to jump.
-  
-## QBert
-  - Qbert stands on the side of the hat
-  - A pacman ghost bumps into him and runs off
-  - Qbert spews his swear line
-  
-## Space Invaders
-  - Two lines of space invaders march around the hat
-  - The bottom row is shot out one by one
-  - The top row advances down
-  - The flying saucer flashes around the top line
-
-## Sprites
-
-http://simonowen.com/sam/articles/pacemu/
 
 # SD Card Format
 
