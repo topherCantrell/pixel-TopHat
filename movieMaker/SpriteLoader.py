@@ -5,7 +5,7 @@ class SpriteLoader:
         
         self.sprites = {}
         
-        with open("..\Sprites.txt") as f:
+        with open("Sprites.txt") as f:
             lines = f.readlines()
             
         currentName = None
@@ -56,11 +56,33 @@ class SpriteLoader:
             ret.append(drow)            
         return ret
     
-    def flipLeftRight(self,colorSprite):
-        pass
+    def flipLeftRight(self,sprite):
+        '''
+        int [][] ret = new int[colorSprite.length][colorSprite[0].length];
+        for(int y=0;y<colorSprite.length;++y) {
+            for(int x=0;x<colorSprite[y].length;++x) {
+                ret[y][colorSprite[y].length-x-1] = colorSprite[y][x];
+            }
+        }
+        return ret;
+        '''
+        ret = [[[] for i in range(len(sprite[0]))] for i in range(len(sprite))] 
+        for y in range(0,len(sprite)):
+            for x in range(0,len(sprite[y])):
+                ret[y][len(sprite[y])-x-1] = sprite[y][x]            
+        
+        return ret
     
     def flipUpDown(self,colorSprite):
-        pass
+        '''
+        int [][] ret = new int[colorSprite.length][];
+        int i = ret.length-1;
+        for(int x=0;x<colorSprite.length;++x) {
+            ret[i] = colorSprite[x];
+            --i;
+        }        
+        return ret;
+        '''
     
 
 if __name__ == '__main__':

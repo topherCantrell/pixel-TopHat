@@ -25,7 +25,7 @@ def readMovie(filename):
     
     if len(ret["name"])>15:
         raise Exception("Name must be less than 16 characters: "+ret["name"])
-    lines = readLines("../"+filename)
+    lines = readLines(filename)
     pos = 0
     while True:
         g = lines[pos]
@@ -60,14 +60,14 @@ def fourByteNumber(number):
     return bytes(by)
         
     
-master = readLines("../master.txt")
+master = readLines("master.txt")
 
 movies = []
 for m in master:
     movies.append(readMovie(m))
     
-binA = open("aPY.bin","wb")
-binB = open("bPY.bin","wb")
+binA = open("a.bin","wb")
+binB = open("b.bin","wb")
 
 preA = b'2018\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
 binA.write(preA)
