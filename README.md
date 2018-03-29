@@ -14,7 +14,7 @@ From adafruit: https://www.adafruit.com/product/2294
 
 One pixel circle for the top. $48<br>
 http://www.ebay.com/itm/311923131692<br>
-Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JV22TS/ref=sr_1_11
+Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JY6796
 
 Six meters of 144/m strips for the brim and fill for the top. $100.80<br>
 http://www.ebay.com/itm/222533276234
@@ -30,7 +30,7 @@ One Kobalt battery charger from Lowe's. $40<br>
 https://www.lowes.com/pd/Kobalt-24-Volt-Max-Power-Tool-Battery-Charger/1000102901
 
 One foam pad from Amazon. $13<br>
-https://www.amazon.com/gp/product/B00069PFKK/ref=oh_aui_detailpage_o05_s00
+https://www.amazon.com/gp/product/B00069PFKK
 
 Eight 1000uF capacitors from DigiKey. $5<br>
 https://www.digikey.com/product-detail/en/rubycon/25PX1000MEFCT810X16/1189-1583-1-ND/3134540
