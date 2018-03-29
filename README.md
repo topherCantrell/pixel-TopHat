@@ -4,6 +4,8 @@ A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Much thanks to my buddy Gary Dion for suggestions and support.
 
+On AdaFruit Show-and-Tell: https://youtu.be/zwyWCEgpvOA?t=411
+
 # Parts
 
 Four flexible grids for the body. $148<br>
