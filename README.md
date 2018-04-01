@@ -6,6 +6,8 @@ Much thanks to my buddy Gary Dion for suggestions and support.
 
 On AdaFruit Show-and-Tell: https://youtu.be/zwyWCEgpvOA?t=411
 
+The hat in action: https://www.youtube.com/watch?v=POvtpbCsYLs
+
 # Parts
 
 Four flexible grids for the body. $148<br>
