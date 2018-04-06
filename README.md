@@ -4,6 +4,10 @@ A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Much thanks to my buddy Gary Dion for suggestions and support.
 
+On AdaFruit Show-and-Tell: https://youtu.be/zwyWCEgpvOA?t=411
+
+The hat in action: https://www.youtube.com/watch?v=POvtpbCsYLs
+
 # Parts
 
 Four flexible grids for the body. $148<br>
@@ -12,7 +16,7 @@ From adafruit: https://www.adafruit.com/product/2294
 
 One pixel circle for the top. $48<br>
 http://www.ebay.com/itm/311923131692<br>
-Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JV22TS/ref=sr_1_11
+Amazon: https://www.amazon.com/MOKUNGIT-WS2812B-Ring-RGB-Integrated/dp/B077JY6796
 
 Six meters of 144/m strips for the brim and fill for the top. $100.80<br>
 http://www.ebay.com/itm/222533276234
@@ -28,7 +32,7 @@ One Kobalt battery charger from Lowe's. $40<br>
 https://www.lowes.com/pd/Kobalt-24-Volt-Max-Power-Tool-Battery-Charger/1000102901
 
 One foam pad from Amazon. $13<br>
-https://www.amazon.com/gp/product/B00069PFKK/ref=oh_aui_detailpage_o05_s00
+https://www.amazon.com/gp/product/B00069PFKK
 
 Eight 1000uF capacitors from DigiKey. $5<br>
 https://www.digikey.com/product-detail/en/rubycon/25PX1000MEFCT810X16/1189-1583-1-ND/3134540
@@ -65,9 +69,9 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 
 # Circuit
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure1.png">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure4.png">
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure2.png">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure3.png">
 
 # Web Interface
 
@@ -91,6 +95,6 @@ starts with a 0 ends the list.
 
 # Software
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure3.png">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure6.png">
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure4.png">
+<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure7.png">
