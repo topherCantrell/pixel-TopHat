@@ -1,13 +1,10 @@
-import SpriteLoader
-import HatFrame
-from errno import EROFS
+from SpriteLoader import SpriteLoader
+from HatFrame import HatFrame
 
-sprites = SpriteLoader.SpriteLoader()
+sprites = SpriteLoader() # Contains all the sprite ASCII art
 
-invaderMap = ['#', 1]
-invaders = [
-    sprites.doubler(sprites.colorSprite("invaderA1", invaderMap)),
-    sprites.doubler(sprites.colorSprite("invaderA2", invaderMap)),    
+invaderMap = ['#', 1] # Maps of ASCII characters to color numbers
+invaders = [ 
     sprites.doubler(sprites.colorSprite("invaderB1", invaderMap)),    
     sprites.doubler(sprites.colorSprite("invaderB2", invaderMap)),    
     sprites.doubler(sprites.colorSprite("invaderC1", invaderMap)),    
@@ -17,33 +14,27 @@ invaders = [
 with open("invGEN.txt","w") as ps:
     
     for y in range(-15,0,1):    
-        f = HatFrame.HatFrame()
-        ofs = y%2
-        if ofs<0:
-             ofs=-ofs
-        f.draw_sprite(0, y, invaders[2+ofs])    
-        f.draw_sprite(35,y, invaders[4+ofs])
+        f = HatFrame()
+        ofs = abs(y%2) 
+        f.draw_sprite(0, y, invaders[ofs])    
+        f.draw_sprite(35,y, invaders[2+ofs])
         ps.write("%\n")
         ps.write(f.to_string()+"\n")
 
     
-    for x in range(0,64):
-        f = HatFrame.HatFrame()
-        ofs = x%2
-        if ofs<0:
-            ofs=-ofs
-        f.draw_sprite(x+0, 0, invaders[2+ofs]);    
-        f.draw_sprite(x+35,0, invaders[4+ofs]);
-        ps.write("%\n")
+    for x in range(64):
+        f = HatFrame()
+        ofs = abs(x%2) # Every step alternate sprite images       
+        f.draw_sprite(x+0, 0, invaders[ofs]);    
+        f.draw_sprite(x+35,0, invaders[2+ofs]);
+        ps.write("%\n") # Mark between frames
         ps.write(f.to_string()+"\n")
        
     for y in range(0,-16,-1):
-        f = HatFrame.HatFrame()
-        ofs = y%2
-        if ofs<0:
-            ofs=-ofs
-        f.draw_sprite(0, y, invaders[2+ofs]);    
-        f.draw_sprite(35,y, invaders[4+ofs]);
+        f = HatFrame()
+        ofs = abs(y%2) 
+        f.draw_sprite(0, y, invaders[ofs]);    
+        f.draw_sprite(35,y, invaders[2+ofs]);
         ps.write("%\n")
         ps.write(f.to_string()+"\n")
         
