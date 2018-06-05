@@ -4,9 +4,15 @@ A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Much thanks to my buddy Gary Dion for suggestions and support.
 
-On AdaFruit Show-and-Tell: https://youtu.be/zwyWCEgpvOA?t=411
-
 The hat in action: https://www.youtube.com/watch?v=POvtpbCsYLs
+
+### As seen on Adafruit Show and Tell 
+
+https://youtu.be/zwyWCEgpvOA?t=411
+
+![](https://github.com/topherCantrell/FSM/blob/master/art/seen.jpg)
+
+### Published in Circuit Cellar, June 2018
 
 # Parts
 
