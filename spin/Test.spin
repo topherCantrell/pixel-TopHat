@@ -61,13 +61,23 @@ PRI PauseMSec(Duration)
 
 DAT
 
-colors
-
+colors1
     long $00_00_00_00
-    long $00_05_05_05      
+    long $00_05_05_05
 
-pixels
+colors2
+    long $00_00_00_00
+    long $00_00_05_05
 
+colors3               
+    long $00_00_00_00
+    long $00_05_05_00
+
+colors4
+    long $00_00_00_00
+    long $00_05_00_05       
+
+pixelPattern
     byte 1,1,0,1,1,0,1,0
     byte 0,1,0,0,1,0,1,0    
     byte 0,0,0,0,0,0,0,0
