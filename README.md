@@ -75,15 +75,15 @@ pixel on the edge facing out, then folded again with 3 pixels on the bottom.
 
 # Circuit
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure4.png">
+![](art/figure4.png)
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure3.png">
+![](art/figure3.png)
 
 # Web Interface
 
 The Pi Zero is configured as an access point. You connect to it with your phone and load the control page.
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/web.jpg">
+![](art/web.jpg)
 
 # SD Card Format
 
@@ -101,6 +101,6 @@ starts with a 0 ends the list.
 
 # Software
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure6.png">
+![](art/figure6.png)
 
-<img src="https://github.com/topherCantrell/pixelHat/blob/master/art/figure7.png">
+![](art/figure7.png)
