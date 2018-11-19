@@ -28,7 +28,7 @@ class SpriteLoader:
             
     def colorSprite(self,name,colorMap):
         sprite = self.sprites[name]
-        ret = [[[] for i in range(len(sprite[0]))] for i in range(len(sprite))]        
+        ret = [[[] for _ in range(len(sprite[0]))] for _ in range(len(sprite))]        
         for y in range(0,len(sprite)):
             s = sprite[y]
             for x in range(len(s)):
@@ -66,7 +66,7 @@ class SpriteLoader:
         }
         return ret;
         '''
-        ret = [[[] for i in range(len(sprite[0]))] for i in range(len(sprite))] 
+        ret = [[[] for _ in range(len(sprite[0]))] for _ in range(len(sprite))] 
         for y in range(0,len(sprite)):
             for x in range(0,len(sprite[y])):
                 ret[y][len(sprite[y])-x-1] = sprite[y][x]            
