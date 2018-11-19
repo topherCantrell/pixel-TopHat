@@ -1,4 +1,5 @@
 import importlib
+from pygame import font
 
 # 8x9
 # https://fontstruct.com/fontstructions/show/1208100/16-bit-7x9-nostalgia
@@ -8,7 +9,7 @@ import importlib
 # https://www.bigstockphoto.com/image-95284172/stock-vector-8-bit-font
 
 def draw_char(font,frame,x,y,c,color):
-    
+            
     c = ord(c) - 0x20    
     offs,width,height,adv_cursor,x_ofs,y_ofs = font.Glyphs[c]
     
@@ -23,8 +24,8 @@ def draw_char(font,frame,x,y,c,color):
             c = s[j*width+i]
             if c == '1':
                 c = color
-                print(":"+str(x+x_ofs+i)+":"+str(y+y_ofs+j)+":")
-                frame.set_side_brim_pixel(x+x_ofs+i, y+y_ofs+j, color)
+                nx = x+x_ofs+i
+                frame.set_side_brim_pixel(nx, y+y_ofs+j, color)
     return adv_cursor
      
 def draw_string(font,frame,x,y,s,color,letter_offset=1):
@@ -40,13 +41,31 @@ def draw_string(font,frame,x,y,s,color,letter_offset=1):
             cp = 0
     return x        
 
+class Marquee:
+    
+    def __init__(self,font,s,color,start=0,length=64):
+        self._length = length
+        self._start = start
+        self._font = font
+        self._s = s
+        self._color = color
+        self._pos = self._length+self._start-1
+        
+    def draw(self,frame,start_bar_color=None,stop_bar_color=None):
+        pass
+    
+    def advance(self,distance):
+        pass
+
 from HatFrame import HatFrame
 
 frame = HatFrame()
 draw_string("FreeSerif9pt7b",frame,-15,13,'Test',1)
 
-import dev
-dev.show_frame(frame)
+print(frame.to_string())
+
+#import dev
+#dev.show_frame(frame)
 
 
 
