@@ -14,6 +14,13 @@ https://youtu.be/zwyWCEgpvOA?t=411
 
 ### Published in Circuit Cellar, June 2018
 
+#2018
+
+I am using the hat for the Huntsville Christmas parade. Outstanding items:
+  - Type in text for marquee
+  - Revisit show-and-tell
+  - Ability to push frames to hat in development
+
 # Parts
 
 Four flexible grids for the body. $148<br>

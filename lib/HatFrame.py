@@ -165,7 +165,7 @@ class HatFrame:
             return self.sideBrim[p-295]
         
     def set_line(self,n,color):        
-        for p in HatFrames.LINES[n]:
+        for p in HatFrame.LINES[n]:
             self.set_pixel(p+295,color)
     
     def set_ring(self,n,color):
@@ -256,6 +256,9 @@ class HatFrame:
                 # Notice the -1 X offset
                 ret = ret + chr(self.get_side_brim_pixel(x+xx-1,y+yy)).encode('ascii')
         return ret
+    
+    def get_binaries(self):
+        return [self.get_binary(True),self.get_binary(False)]
     
     def get_binary(self,cpuA):
         ret = b''  

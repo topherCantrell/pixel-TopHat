@@ -175,6 +175,8 @@ PUB main | i, j
           PST.str(string("Waiting on rest of line ... "))
           WEB.StrIn(@movieConfig)
           j := byte[@movieConfig]
+          if j==$3F ' Development mode
+            developmentMode
           if j=>$30 and j=<$39
             ' This is a brightness command
             currentColorMult := j - $30
@@ -223,6 +225,47 @@ PUB main | i, j
       bufferOffset := bufferNextOffset
       bufferNextOffset := i
 
+PUB developmentMode | c,p,v
+'
+' Send: '1' followed by 1024 bytes for the frame pixels for the 1st CPU
+'       '2' followed by 1024 bytes for the frame pixels for the 2nd CPU
+'       'A' followed by 1024 bytes for the color palette for the 1st CPU
+'       'B' followed by 1024 bytes for the color palette for the 2nd CPU
+'       '?' ignored
+
+' Visual indication that we are in dev mode
+
+PauseMSec(500) ' Let any disk operations complete
+
+long[@adjustedColors]   := $00_00_00_02
+long[@adjustedColors+4] := $00_02_02_02  
+repeat c from 0 to 1023
+    byte[@frameBuffer+c] := 0
+byte[@frameBuffer] := 1
+
+repeat
+
+    ' Draw the current frame
+    STRIPA.draw(2, @adjustedColors, @frameBuffer    , pinS1, 256)
+    STRIPB.draw(2, @adjustedColors, @frameBuffer+256, pinS2, 256)
+    STRIPC.draw(2, @adjustedColors, @frameBuffer+512, pinS3, 256)
+    STRIPD.draw(2, @adjustedColors, @frameBuffer+768, pinS4, 256)
+  
+    c := WEB.CharIn
+    if c==$31 or c==$32 or c==65 or c==66
+        ' Read a 1024 byte buffer
+        ' We need to load the buffer even if it doesn't belong to us to stay in sync
+        repeat p from 0 to 1023
+            v := WEB.CharIn
+            byte[@frameBuffer+1024+p] := v
+        if (c==$31 and animationMap[15]==1) or (c==$32 and animationMap[15]==2)
+            repeat p from 0 to 1023
+                byte[@frameBuffer+p] := byte[@frameBuffer+1024+p]
+          
+        elseif (c==65 and animationMap[15]==1) or (c==66 and animationMap[15]==2)
+            repeat p from 0 to 1023
+                byte[@adjustedColors+p] := byte[@frameBuffer+1024+p]    
+  
 PRI adjustColors | i,j, k, x
   repeat i from 0 to 256 ' 256 longs = 1024 bytes
     k := long[@colorMult+currentColorMult*4] ' Multiplier for each byte in color
