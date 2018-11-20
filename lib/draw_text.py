@@ -1,5 +1,4 @@
 import importlib
-from pygame import font
 
 # 8x9
 # https://fontstruct.com/fontstructions/show/1208100/16-bit-7x9-nostalgia
@@ -27,6 +26,14 @@ def draw_char(font,frame,x,y,c,color):
                 nx = x+x_ofs+i
                 frame.set_side_brim_pixel(nx, y+y_ofs+j, color)
     return adv_cursor
+
+def get_string_length(s,font,letter_offset=1):
+    font = importlib.import_module('fonts.'+font)
+    ret = 0
+    for c in s:
+        c = ord(c) - 0x20 
+        ret = ret + font.Glyphs[c][3] + letter_offset
+    return ret
      
 def draw_string(font,frame,x,y,s,color,letter_offset=1):
     font = importlib.import_module('fonts.'+font)
@@ -56,16 +63,4 @@ class Marquee:
     
     def advance(self,distance):
         pass
-
-from HatFrame import HatFrame
-
-frame = HatFrame()
-draw_string("FreeSerif9pt7b",frame,-15,13,'Test',1)
-
-print(frame.to_string())
-
-#import dev
-#dev.show_frame(frame)
-
-
 
