@@ -24,11 +24,11 @@ def draw_char(font,frame,x,y,c,color):
             if c == '1':
                 c = color
                 nx = x+x_ofs+i
-                frame.set_side_brim_pixel(nx, y+y_ofs+j, color)
+                frame.set_raw_pixel(nx, y+y_ofs+j, color)
     return adv_cursor
 
 def get_string_length(s,font,letter_offset=1):
-    font = importlib.import_module('fonts.'+font)
+    font = importlib.import_module('pixel_text_fonts.'+font)
     ret = 0
     for c in s:
         c = ord(c) - 0x20 
@@ -36,7 +36,7 @@ def get_string_length(s,font,letter_offset=1):
     return ret
      
 def draw_string(font,frame,x,y,s,color,letter_offset=1):
-    font = importlib.import_module('fonts.'+font)
+    font = importlib.import_module('pixel_text_fonts.'+font)
     if not isinstance(color,list):
         color = [color]
     cp = 0    

@@ -1,7 +1,6 @@
 
 class HatFrame:
-    
-    
+            
     RINGS = [
         [-241], # 0
         [-240,-239,-238,-237,-236,-235,-234,-233], 
@@ -130,7 +129,9 @@ class HatFrame:
             self.topRing = self._run_from_string(raw,54,241)
             self.sideBrim = self._run_from_string(raw,295,256*6)               
         
-    def set_side_brim_pixel(self,x,y,color):
+    def set_pixel(self,x,y,color):
+        if x==None or y==None:
+            return
         if y<0 or y>23:
             return
         while x<0:
@@ -139,7 +140,7 @@ class HatFrame:
             x -= 64
         self.sideBrim[y*64+x] = color
         
-    def get_side_brim_pixel(self,x,y):
+    def get_pixel(self,x,y):
         if y<0 or y>23:
             return 0
         while x<0:
@@ -148,7 +149,7 @@ class HatFrame:
             x -= 64
         return self.sideBrim[y*64+x]
     
-    def set_pixel(self,p,color):
+    def set_raw_pixel(self,p,color):
         if p<54:
             self.topEdges[p] = color
         elif p<295:
@@ -156,7 +157,7 @@ class HatFrame:
         else:
             self.sideBrim[p-295] = color
     
-    def get_pixel(self,p):
+    def get_raw_pixel(self,p):
         if p<54:
             return self.topEdges[p]
         elif p<295:
@@ -166,16 +167,16 @@ class HatFrame:
         
     def set_line(self,n,color):        
         for p in HatFrame.LINES[n]:
-            self.set_pixel(p+295,color)
+            self.set_raw_pixel(p+295,color)
     
     def set_ring(self,n,color):
         for p in HatFrame.RINGS[n]:
-            self.set_pixel(p+295,color)
+            self.set_raw_pixel(p+295,color)
     
     def draw_sprite(self,x,y, sprite):
         for yy in range(0,len(sprite)):
             for xx in range(0,len(sprite[yy])):
-                self.set_side_brim_pixel(x+xx,y+yy,sprite[yy][xx])
+                self.set_pixel(x+xx,y+yy,sprite[yy][xx])
                 
     def _data_run(self, data,pos,count):
         ret = ''
@@ -239,10 +240,10 @@ class HatFrame:
         
         for xx in range(31,-1,-2):
             for yy in range(7,-1,-1):
-                ret = ret + chr(self.get_side_brim_pixel(x+xx,y+yy)).encode('ascii')
+                ret = ret + chr(self.get_pixel(x+xx,y+yy)).encode('ascii')
             xx = xx - 1
             for yy in range(0,8):
-                ret = ret + chr(self.get_side_brim_pixel(x+xx,y+yy)).encode('ascii')         
+                ret = ret + chr(self.get_pixel(x+xx,y+yy)).encode('ascii')         
         return ret
     
     def _get_brim_rectangle(self,x,y):        
@@ -250,11 +251,11 @@ class HatFrame:
         for xx in range(0,32,2):
             for yy in range(7,-1,-1):
                 # Notice the -1 X offset
-                ret = ret + chr(self.get_side_brim_pixel(x+xx-1,y+yy)).encode('ascii')
+                ret = ret + chr(self.get_pixel(x+xx-1,y+yy)).encode('ascii')
             xx = xx + 1
             for yy in range(0,8): 
                 # Notice the -1 X offset
-                ret = ret + chr(self.get_side_brim_pixel(x+xx-1,y+yy)).encode('ascii')
+                ret = ret + chr(self.get_pixel(x+xx-1,y+yy)).encode('ascii')
         return ret
     
     def get_binaries(self):

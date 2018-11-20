@@ -45,7 +45,7 @@ with open("sparkGEN.txt","w") as ps:
         f = HatFrame.HatFrame()
         for p in range(1831):
             if pix[p]!=0:
-                f.set_pixel(p,pix[p])
+                f.set_raw_pixel(p,pix[p])
         ps.write("%\n")
         ps.write(f.to_string()+"\n")
     

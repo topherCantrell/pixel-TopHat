@@ -1,4 +1,4 @@
-import draw_text
+import pixel_text
 
 class Loop:
     
@@ -41,28 +41,25 @@ class Loop:
             return self._map[x]+self._phys_ofs
         return None        
 
-class HatFrameAdapter:
+class MarqueeGraphics:
     
     def __init__(self,frame,loop):
         self._frame = frame
         self._loop = loop
         
-    def set_side_brim_pixel(self,x,y,color):
+    def set_raw_pixel(self,x,y,color):
         nx = self._loop.trans(x)
         if nx!=None:
-            frame.set_side_brim_pixel(nx,y,color)
+            frame.set_pixel(nx,y,color)
     
 class Marquee:
     
-    # Options:
-    # Appear on or scroll on
-    # Loop or exit
-    # Make 3x buffer for on and off as needed
+    # TODO explain how to scroll on, off, and loop
     
     def __init__(self,y,text,font,color,letter_offset=1,
                  phys_ofs=0,length=None,view_start=0,view_length=64):
         if length==None:
-            length = draw_text.get_string_length(text,font,letter_offset)+letter_offset
+            length = pixel_text.get_string_length(text,font,letter_offset)+letter_offset
             if length<64:
                 length = 64
         
@@ -76,20 +73,15 @@ class Marquee:
         self._color = color
         self._pos = 0
         
-    def enable_offscreen(self,enable):
-        # True makes a double buffer
-        # False makes a single buffer
-        # To scroll on, set the pos to the start of the second half and advance backwards
-        # To scroll off, continue to advance backwards
-        # To loop scroll, set the single buffer
+    def enable_offscreen(self,enable):       
         if enable:
             self._loop = Loop(self._length*2,self._view_start,self._view_length,self._phys_ofs)
         else:
             self._loop = Loop(self._length,self._view_start,self._view_length,self._phys_ofs)
         
     def draw(self,frame):
-        adapt = HatFrameAdapter(frame,self._loop)
-        draw_text.draw_string(self._font,adapt,self._pos,self._y,self._text,self._color,self._letter_offset)
+        adapt = MarqueeGraphics(frame,self._loop)
+        pixel_text.draw_string(self._font,adapt,self._pos,self._y,self._text,self._color,self._letter_offset)
     
     def scroll(self,ofs):
         self._pos += ofs
@@ -107,5 +99,5 @@ marquee.draw(frame)
 
 print(frame.to_string())
 
-import dev
-dev.show_frame(frame)
+#import dev
+#dev.show_frame(frame)

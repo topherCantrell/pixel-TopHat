@@ -67,54 +67,54 @@ def getRedGhostImageName():
         return "?"   
 
 def drawFlasher(f,inout,count):
-    f.set_side_brim_pixel(0,7, random.randint(0,2)+12)
-    f.set_side_brim_pixel(0, 8, random.randint(0,2)+12);
-    f.set_side_brim_pixel(1, 7, random.randint(0,2)+12);
-    f.set_side_brim_pixel(1, 8, random.randint(0,2)+12);
+    f.set_pixel(0,7, random.randint(0,2)+12)
+    f.set_pixel(0, 8, random.randint(0,2)+12);
+    f.set_pixel(1, 7, random.randint(0,2)+12);
+    f.set_pixel(1, 8, random.randint(0,2)+12);
     if count>0:
-        f.set_side_brim_pixel(0, 6, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 9, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 6, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 9, random.randint(0,2)+12);
+        f.set_pixel(0, 6, random.randint(0,2)+12);
+        f.set_pixel(0, 9, random.randint(0,2)+12);
+        f.set_pixel(1, 6, random.randint(0,2)+12);
+        f.set_pixel(1, 9, random.randint(0,2)+12);
     
     if count>1:
-        f.set_side_brim_pixel(0, 5, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 4, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 10, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 11, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 5, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 4, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 10, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 11, random.randint(0,2)+12);
+        f.set_pixel(0, 5, random.randint(0,2)+12);
+        f.set_pixel(0, 4, random.randint(0,2)+12);
+        f.set_pixel(0, 10, random.randint(0,2)+12);
+        f.set_pixel(0, 11, random.randint(0,2)+12);
+        f.set_pixel(1, 5, random.randint(0,2)+12);
+        f.set_pixel(1, 4, random.randint(0,2)+12);
+        f.set_pixel(1, 10, random.randint(0,2)+12);
+        f.set_pixel(1, 11, random.randint(0,2)+12);
     
     if count>2:
-        f.set_side_brim_pixel(0, 3, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 2, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 12, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 13, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 3, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 2, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 12, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 13, random.randint(0,2)+12);
+        f.set_pixel(0, 3, random.randint(0,2)+12);
+        f.set_pixel(0, 2, random.randint(0,2)+12);
+        f.set_pixel(0, 12, random.randint(0,2)+12);
+        f.set_pixel(0, 13, random.randint(0,2)+12);
+        f.set_pixel(1, 3, random.randint(0,2)+12);
+        f.set_pixel(1, 2, random.randint(0,2)+12);
+        f.set_pixel(1, 12, random.randint(0,2)+12);
+        f.set_pixel(1, 13, random.randint(0,2)+12);
     
     if count>3:
-        f.set_side_brim_pixel(0, 0, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 1, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 14, random.randint(0,2)+12);
-        f.set_side_brim_pixel(0, 15, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 0, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 1, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 14, random.randint(0,2)+12);
-        f.set_side_brim_pixel(1, 15, random.randint(0,2)+12);
+        f.set_pixel(0, 0, random.randint(0,2)+12);
+        f.set_pixel(0, 1, random.randint(0,2)+12);
+        f.set_pixel(0, 14, random.randint(0,2)+12);
+        f.set_pixel(0, 15, random.randint(0,2)+12);
+        f.set_pixel(1, 0, random.randint(0,2)+12);
+        f.set_pixel(1, 1, random.randint(0,2)+12);
+        f.set_pixel(1, 14, random.randint(0,2)+12);
+        f.set_pixel(1, 15, random.randint(0,2)+12);
     
     if inout:
         for x in range(2,50-count):
             for y in range(0,16):
-                f.set_side_brim_pixel(x,y,0)
+                f.set_pixel(x,y,0)
     else:
         for x in range(2,count):
             for y in range(0,16):
-                f.set_side_brim_pixel(x,y,0)
+                f.set_pixel(x,y,0)
                 
 
 sprites = SpriteLoader.SpriteLoader()
