@@ -2,13 +2,34 @@ from HatFrame import HatFrame
 
 bricks = [
     [ 5,1,  2,2],
-    [11,2,  4,2],
-    [ 1,3,  2,3],
-    [ 7,3,  2,1],
+    [11,1,  4,2],
+    [ 1,2,  2,3],
+    [ 7,2,  2,1],
     [ 2,4,  4,4],
     [-2,5,  4,5],
+    [ 8,6,  4,2],
+    [ 4,8,  4,1],
+    [11,9,  4,3],
+    [-1,10, 2,2],
+    [ 8,10, 2,5],
+    [ 9,12, 4,4],
+    [ 3,12, 2,3],
+    [-2,13, 4,1],
+    [7,14,  2,2],
     
+    [-2,20, 4,5],
+    [ 2,20, 4,6],
+    [ 6,20, 4,5],
+    [10,20, 4,6],    
+    [ 0,21, 4,5],
+    [ 4,21, 4,6],
+    [ 8,21, 4,5],
+    [12,21, 4,5]   
 ]
+
+for brick in bricks:
+    brick[0] *= 4
+    brick[1] *= 4
 
 pattern = '''
 ................
@@ -19,13 +40,13 @@ pattern = '''
 55............55
 ........2222....
 ................
-....1111........
-...........3333.
-2.......55.....2
-.........4444...
-...33...........
-11............11
-.......22.......
+....1111........ 
+...........3333.  
+2.......55.....2    
+................   
+...33....4444... 
+11............11 
+.......22....... 
 ................
 ................
 ................
@@ -43,53 +64,33 @@ frag = '''
 ****
 '''
 
-pattern = pattern.replace('\n','')
 frag = frag.replace('\n','')
 
-numRows = int(len(pattern)/16)*4
+numRows = 22
 
-buffer = []
-for i in range(numRows):
-    buffer.append([0]*(16*4))
-
-for i in range(len(pattern)):    
-    y = int(i/16)*4
-    x = int(i%16)*4
-    for yy in range(4):
-        for xx in range(4):
-            buffer[y+yy][x+xx] = pattern[i]
-    if y>0 and pattern[i]!='.' and buffer[y-1][x+1]=='.':
-        buffer[y-1][x+1] = pattern[i]
-        buffer[y-1][x+2] = pattern[i]            
-            
-with open("legoGEN.txt","w") as ps:
+with open('legoGEN.txt','w') as ps:
+    changed = True
     
-    for _ in range(60):            
+    ofs = numRows*4-24
+    while changed:
+        changed = False
         frame = HatFrame()
-        for y in range(24):
-            for x in range(64):
-                c = buffer[y+numRows-24][x]
-                if c=='.':
-                    c=0
-                else:
-                    c=int(c)
-                frame.set_pixel(x,y,c)
-        ps.write("%\n")
-        ps.write(frame.to_string()+"\n")
-        # Collapse 1 row
+        for x in range(len(bricks)-1,-1,-1):
+            brick = bricks[x]
+            for z in range(brick[2]):
+                for i in range(4):
+                    for j in range(4):
+                        frame.set_pixel(i+brick[0]+z*4,j+brick[1]-ofs,brick[3])
+                frame.set_pixel(brick[0]+z*4+1,brick[1]-1-ofs,brick[3])
+                frame.set_pixel(brick[0]+z*4+2,brick[1]-1-ofs,brick[3])
+        ps.write('%\n')
+        ps.write(frame.to_string()+'\n')
         
-        # 4 columns at a time. Find the first blank from the bottom. Close down from
-        # there up
-        
-        for xx in range(0,64,4):
-            yy = numRows-9
-            while buffer[yy][xx]!='.':
-                yy = yy - 1
-            if buffer[yy-1][xx]=='.':
-                yy = yy - 1
-            for i in range(4):
-                j = yy
-                while j>0:
-                    buffer[j][xx+i] = buffer[j-1][xx+i]
-                    j = j -1
-
+        for brick in bricks[0:-8]:
+            can_fall = True
+            for z in range(brick[2]):                
+                if frame.get_pixel(brick[0]+z*4,brick[1]+4-ofs)!=0:                    
+                    can_fall = False
+            if can_fall:
+                brick[1] += 1
+                changed = True

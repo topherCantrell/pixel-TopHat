@@ -141,6 +141,8 @@ class HatFrame:
         self.sideBrim[y*64+x] = color
         
     def get_pixel(self,x,y):
+        if x==None or y==None:
+            return
         if y<0 or y>23:
             return 0
         while x<0:
