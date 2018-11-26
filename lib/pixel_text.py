@@ -24,7 +24,7 @@ def draw_char(font,frame,x,y,c,color):
             if c == '1':
                 c = color
                 nx = x+x_ofs+i
-                frame.set_raw_pixel(nx, y+y_ofs+j, color)
+                frame.set_pixel(nx, y+y_ofs+j, color)
     return adv_cursor
 
 def get_string_length(s,font,letter_offset=1):

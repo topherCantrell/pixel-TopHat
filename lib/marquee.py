@@ -1,4 +1,5 @@
 import pixel_text
+import HatFrame
 
 class Loop:
     
@@ -47,10 +48,10 @@ class MarqueeGraphics:
         self._frame = frame
         self._loop = loop
         
-    def set_raw_pixel(self,x,y,color):
+    def set_pixel(self,x,y,color):
         nx = self._loop.trans(x)
         if nx!=None:
-            frame.set_pixel(nx,y,color)
+            self._frame.set_pixel(nx,y,color)
     
 class Marquee:
     
@@ -58,6 +59,11 @@ class Marquee:
     
     def __init__(self,y,text,font,color,letter_offset=1,
                  phys_ofs=0,length=None,view_start=0,view_length=64):
+        
+        self._view_start = view_start
+        self._view_length = view_length
+        self._phys_ofs = phys_ofs
+        
         if length==None:
             length = pixel_text.get_string_length(text,font,letter_offset)+letter_offset
             if length<64:
@@ -75,9 +81,9 @@ class Marquee:
         
     def enable_offscreen(self,enable):       
         if enable:
-            self._loop = Loop(self._length*2,self._view_start,self._view_length,self._phys_ofs)
+            self._loop = Loop(self.length*2,self._view_start,self._view_length,self._phys_ofs)
         else:
-            self._loop = Loop(self._length,self._view_start,self._view_length,self._phys_ofs)
+            self._loop = Loop(self.length,self._view_start,self._view_length,self._phys_ofs)
         
     def draw(self,frame):
         adapt = MarqueeGraphics(frame,self._loop)
@@ -85,19 +91,52 @@ class Marquee:
     
     def scroll(self,ofs):
         self._pos += ofs
-    
-    
-from HatFrame import HatFrame
+        
+    def set_pos(self,pos):
+        self._pos = pos
+        
+def scroll_across(y,s,font,colors,rate=4):
+    ret = []
+    mar = Marquee(y,s,font,colors)
+    mar.enable_offscreen(True)
+    slen = pixel_text.get_string_length(s,font)    
+    rate = 0-rate
+    for pos in range(64,0-slen,rate):
+        mar.set_pos(pos)
+        frame = HatFrame.HatFrame()
+        ret.append(frame)            
+        mar.draw(frame)
+    return ret
 
-marquee = Marquee(12,'Stacy','FreeSerif9pt7b',1,0)
-#marquee = Marquee(12,64,0,64,0,'Testing','FreeSerif9pt7b',1)
-                  
-frame = HatFrame()
-
-marquee.scroll(-15)
-marquee.draw(frame)
-
-print(frame.to_string())
-
-#import dev
-#dev.show_frame(frame)
+def scroll_on_loop_off(y,s,font,colors,loops,rate=4):
+    ret = []
+    mar = Marquee(y,s,font,colors)
+    mar.enable_offscreen(True)
+    slen = pixel_text.get_string_length(s,font)    
+    rate = 0-rate
+    # Scroll on
+    for pos in range(64,64-slen,rate):
+        mar.set_pos(pos)
+        frame = HatFrame.HatFrame()
+        ret.append(frame)            
+        mar.draw(frame)
+    # Loops
+    mar.enable_offscreen(False)
+    pos = pos + rate
+    for _ in range(int(slen*loops/(1.0-rate))):
+        mar.set_pos(pos)
+        frame = HatFrame.HatFrame()
+        ret.append(frame)            
+        mar.draw(frame)
+        pos = pos + rate
+    # Scroll off
+    pos = pos + rate
+    mar.enable_offscreen(True)
+    for _ in range(slen-64):
+        mar.set_pos(pos+slen)
+        frame = HatFrame.HatFrame()
+        ret.append(frame)            
+        mar.draw(frame)   
+        pos = pos + rate 
+        
+    return ret

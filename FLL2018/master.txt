@@ -1,0 +1,14 @@
+START:
+
+fll.txt
+pacman.txt
+invaders.txt
+sparlke.txt
+
+GOTO START
+
+BLANK:
+
+blank.txt
+
+GOTO BLANK
