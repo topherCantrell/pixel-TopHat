@@ -1,5 +1,6 @@
 import serial
 import time
+import make_sds
 
 _ser = serial.Serial('COM10',115200)
 
@@ -19,3 +20,9 @@ def show_frame(frame):
     _ser.write(b'2')
     _send_buffer(frame.get_binary(False))
     time.sleep(.1)
+    
+def play_movie(filename,start_frame,end_frame=-1):
+    movie = make_sds.readMovie(filename)
+    # Send colors
+    # Send frames one by one with delay between
+    
