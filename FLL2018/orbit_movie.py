@@ -16,14 +16,14 @@ Color pattern:
 import random
 from HatFrame import HatFrame
 
-TOTAL_ORBITERS = 1
+TOTAL_ORBITERS = 24
 ORBIT_DIRECTION = 1
 
-RANDOM_ORBITER_WAIT = [4,11]
-RANDOM_ORBITER_SPEED = [3,6]
-RANDOM_ORBITER_TTL = [25,41]
-RANDOM_ORBITER_LENGTH = [8,25]
-RANDOM_ORBITER_COLOR = [0,8] # 8 levels of each color ... multiply by 8
+RANDOM_ORBITER_WAIT   = [ 4, 10]
+RANDOM_ORBITER_SPEED  = [ 3,  6]
+RANDOM_ORBITER_TTL    = [25, 40]
+RANDOM_ORBITER_LENGTH = [ 8, 24]
+RANDOM_ORBITER_COLOR  = [ 0,  7] # 8 levels of each color ... multiply by 8
 
 def make_orbiter(y):
     ret = {}
@@ -41,12 +41,14 @@ def make_orbiter(y):
 # TODO we can make special orbiters for the rings on top
 
 orbiters = []
-for i in range(1):
+for i in range(24):
     orbiters.append({'ttl':0,'y':i})
 
 with open('orbitGEN.txt','w') as ps:
     
     while len(orbiters)>0:
+        
+        frame = HatFrame()
         
         for i in range(len(orbiters)-1,-1,-1):
             orbit = orbiters[i]
@@ -60,33 +62,38 @@ with open('orbitGEN.txt','w') as ps:
                 
             if orbit['wait']>0:
                 orbit['wait'] -= 1
-                continue
-                   
-            orbit['ttl'] -= 1            
+            else:                   
+                orbit['ttl'] -= 1            
+                
+                if orbit['state'] == 'growing':
+                    orbit['current_length'] += orbit['speed']
+                    orbit['x'] += ORBIT_DIRECTION * orbit['speed'] 
+                    if orbit['current_length']>=orbit['length']:
+                        orbit['state'] = 'running'
+                elif orbit['state'] == 'shrinking':                 
+                    orbit['current_length'] -= orbit['speed']
+                    if orbit['current_length']<1:
+                        orbit['current_length'] = 1
+                else:
+                    orbit['x'] += ORBIT_DIRECTION * orbit['speed']
+                    if orbit['ttl'] <= orbit['length']/orbit['speed']:
+                        orbit['state'] = 'shrinking'
             
-            if orbit['state'] == 'growing':
-                orbit['current_length'] += orbit['speed']
-                orbit['x'] += ORBIT_DIRECTION * orbit['speed'] 
-                if orbit['current_length']>=orbit['length']:
-                    orbit['state'] = 'running'
-            elif orbit['state'] == 'shrinking':                 
-                orbit['current_length'] -= orbit['speed']
-                if orbit['current_length']<1:
-                    orbit['current_length'] = 1
-            else:
-                orbit['x'] += ORBIT_DIRECTION * orbit['speed']
-                if orbit['ttl'] <= orbit['length']/orbit['speed']:
-                    orbit['state'] = 'shrinking'
-            
-            frame = HatFrame()
+           
             for j in range(orbit['current_length']):
                 # TODO color changes over the length
                 color_offset = orbit['current_length']-j-1
+                if color_offset > 4:
+                    color_offset = color_offset-orbit['current_length']+8
+                    if color_offset<4:
+                        color_offset = 4
                 #if color_offset>4:
                 #    color_offset = color_offset -
-                # 0 1 2 3 4 4 4 4 4 4 5 6 7 8    14   14-
+                # 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  n-len+8  = 13-15+8
+                # 0 1 2 3 4 4 4 4 4 4  4  4  4  5  6  7  
                 frame.set_pixel(orbit['x']-j,orbit['y'],orbit['color']+color_offset)
-            ps.write('%\n')
-            ps.write(frame.to_string()+'\n')
+                
+        ps.write('%\n')
+        ps.write(frame.to_string()+'\n')
         
     
