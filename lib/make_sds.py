@@ -1,4 +1,6 @@
-import HatFrame
+import pixel_hat
+
+color_cursor = 0
 
 def readLines(filename):
     with open(filename,"r") as f:
@@ -12,9 +14,32 @@ def readLines(filename):
                 ret.append(line)    
         return ret
 
+def parse_color_spec(spec):
+    global color_cursor
+    spec = spec.replace('_','').strip()
+    if '@' in spec:
+        i = spec.index('@')
+        crs = spec[i+1:].strip()
+        spec = spec[0:i].strip()
+        color_cursor = int(crs,16)
+    if color_cursor>255:
+        raise Exception('Exceeded 256 colors')
+    g = color_cursor
+    color_cursor += 1
+    
+    if spec.startswith('rgb'):
+        i = spec.index('(')
+        j = spec.rindex(')')
+        frags = spec[i+1:j].split(',')
+        spec = '00'+frags[1].strip()+frags[0].strip()+frags[2].strip()
+    
+    return g,int(spec,16)    
+    
 def readMovie(filename):    
+    global color_cursor
+    color_cursor = 0
     ret = {
-        "colors" : [], 
+        "colors" : [0]*256, 
         "delay"  : 0, 
         "frames" : [], 
         "name"   : ''
@@ -33,15 +58,15 @@ def readMovie(filename):
         if g[0]=='%':
             break
         if g[0]=='#':
-            g = g[1:].replace('_','')
-            ret["colors"].append(int(g,16))
+            cps,col = parse_color_spec(g[1:])
+            ret['colors'][cps] = col
         if g.startswith("delay "):
             ret["delay"] = int(g[6:])
             
     fs = ''
     while True:
         if pos==len(lines) or lines[pos][0]=='%':            
-            ret["frames"].append(HatFrame.HatFrame(fs))            
+            ret["frames"].append(pixel_hat.HatFrame(fs))            
             fs = ''
             pos+=1
         if pos>len(lines):

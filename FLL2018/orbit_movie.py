@@ -14,7 +14,7 @@ Color pattern:
 '''
 
 import random
-from HatFrame import HatFrame
+from pixel_hat import HatFrame
 
 TOTAL_ORBITERS = 24
 ORBIT_DIRECTION = 1

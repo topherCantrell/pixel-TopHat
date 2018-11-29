@@ -1,4 +1,4 @@
-from HatFrame import HatFrame
+from pixel_hat import HatFrame
 
 bricks = [
     [ 5,1,  2,2],
