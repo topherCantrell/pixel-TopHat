@@ -18,5 +18,4 @@ with open("invGEN.txt","w") as ps:
         ofs = abs(x%2) # Every step alternate sprite images       
         f.draw_sprite(x+0, 0, invaders[ofs]);    
         f.draw_sprite(x+35,0, invaders[2+ofs]);
-        ps.write("%\n") # Mark between frames
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())

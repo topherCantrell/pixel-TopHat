@@ -83,8 +83,7 @@ with open('legoGEN.txt','w') as ps:
                         frame.set_pixel(i+brick[0]+z*4,j+brick[1]-ofs,brick[3])
                 frame.set_pixel(brick[0]+z*4+1,brick[1]-1-ofs,brick[3])
                 frame.set_pixel(brick[0]+z*4+2,brick[1]-1-ofs,brick[3])
-        ps.write('%\n')
-        ps.write(frame.to_string()+'\n')
+        ps.write(frame.to_string())
         
         for brick in bricks[0:-8]:
             can_fall = True

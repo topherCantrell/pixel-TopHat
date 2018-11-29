@@ -1,5 +1,5 @@
 import SpriteLoader
-import HatFrame
+from pixel_hat import HatFrame
 
 sprites = SpriteLoader.SpriteLoader()
 
@@ -15,7 +15,7 @@ eight = sprites.colorSprite("eight", letterMap)
 with open("teamGEN.txt","w") as ps:
     
     for y in range(22,1,-1):
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         if (y%2)==0:
             f.draw_sprite(0,  y+1, ghostA)
         else:
@@ -25,13 +25,12 @@ with open("teamGEN.txt","w") as ps:
         f.draw_sprite(28, y+2, eight)
         f.draw_sprite(38, y+2, five)
         f.draw_sprite(48, y+2, eight)
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
     
      
     for z in range(2):
         for x in range(63):
-            f = HatFrame.HatFrame()
+            f = HatFrame()
             if (x%2)==0:
                 f.draw_sprite(x+0,  1, ghostA)
             else:
@@ -41,11 +40,10 @@ with open("teamGEN.txt","w") as ps:
             f.draw_sprite(x+28, 2, eight)
             f.draw_sprite(x+38, 2, five)
             f.draw_sprite(x+48, 2, eight)
-            ps.write("%\n")
-            ps.write(f.to_string()+"\n")
+            ps.write(f.to_string())
             
     for y in range(1,23):
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         if (y%2)==0:
             f.draw_sprite(0,  y+1, ghostA)
         else:
@@ -54,6 +52,5 @@ with open("teamGEN.txt","w") as ps:
         f.draw_sprite(28, y+2, eight)
         f.draw_sprite(38, y+2, five)
         f.draw_sprite(48, y+2, eight)
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
             

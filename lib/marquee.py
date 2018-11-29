@@ -103,7 +103,7 @@ def scroll_across(y,s,font,colors,rate=4):
     rate = 0-rate
     for pos in range(64,0-slen,rate):
         mar.set_pos(pos)
-        frame = pixel_hat.pixel_hat()
+        frame = pixel_hat.HatFrame()
         ret.append(frame)            
         mar.draw(frame)
     return ret
@@ -117,7 +117,7 @@ def scroll_on_loop_off(y,s,font,colors,loops,rate=4):
     # Scroll on
     for pos in range(64,64-slen,rate):
         mar.set_pos(pos)
-        frame = pixel_hat.pixel_hat()
+        frame = pixel_hat.HatFrame()
         ret.append(frame)            
         mar.draw(frame)
     # Loops
@@ -125,7 +125,7 @@ def scroll_on_loop_off(y,s,font,colors,loops,rate=4):
     pos = pos + rate
     for _ in range(int(slen*loops/(1.0-rate))):
         mar.set_pos(pos)
-        frame = pixel_hat.pixel_hat()
+        frame = pixel_hat.HatFrame()
         ret.append(frame)            
         mar.draw(frame)
         pos = pos + rate
@@ -134,7 +134,7 @@ def scroll_on_loop_off(y,s,font,colors,loops,rate=4):
     mar.enable_offscreen(True)
     for _ in range(slen-64):
         mar.set_pos(pos+slen)
-        frame = pixel_hat.pixel_hat()
+        frame = pixel_hat.HatFrame()
         ret.append(frame)            
         mar.draw(frame)   
         pos = pos + rate 

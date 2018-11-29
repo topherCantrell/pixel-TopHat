@@ -12,5 +12,4 @@ with open('color_test.txt','w') as ps:
             frame.set_pixel(x*3,y*3+1,color)
             frame.set_pixel(x*3+1,y*3+1,color)    
     
-    ps.write('%\n')
-    ps.write(frame.to_string()+'\n')
+    ps.write(frame.to_string())

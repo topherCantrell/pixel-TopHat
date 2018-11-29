@@ -1,5 +1,5 @@
 from SpriteLoader import SpriteLoader
-from HatFrame import HatFrame
+from pixel_hat import HatFrame
 
 sprites = SpriteLoader() # Contains all the sprite ASCII art
 
@@ -18,8 +18,7 @@ with open("invGEN.txt","w") as ps:
         ofs = abs(y%2) 
         f.draw_sprite(0, y, invaders[ofs])    
         f.draw_sprite(35,y, invaders[2+ofs])
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
 
     
     for x in range(64):
@@ -27,14 +26,12 @@ with open("invGEN.txt","w") as ps:
         ofs = abs(x%2) # Every step alternate sprite images       
         f.draw_sprite(x+0, 0, invaders[ofs]);    
         f.draw_sprite(x+35,0, invaders[2+ofs]);
-        ps.write("%\n") # Mark between frames
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
        
     for y in range(0,-16,-1):
         f = HatFrame()
         ofs = abs(y%2) 
         f.draw_sprite(0, y, invaders[ofs]);    
         f.draw_sprite(35,y, invaders[2+ofs]);
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
         

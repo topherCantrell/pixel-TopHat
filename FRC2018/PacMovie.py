@@ -1,5 +1,5 @@
 import SpriteLoader
-import HatFrame
+from pixel_hat import HatFrame
 import random
 
 sprites = SpriteLoader.SpriteLoader()
@@ -132,7 +132,7 @@ with open("pacGEN.txt","w") as ps:
     ghost2X =  ghost1X - 16;        
     
     for i in range(64):
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         set_rings(f)
         f.draw_sprite(pacX, 2, sprites.colorSprite(get_pac_image_name(), pacMap))
         pacX = pacX - 1            
@@ -144,14 +144,13 @@ with open("pacGEN.txt","w") as ps:
         
         drawFlasher(f,True,i)
         
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
             
     gm = blueGhostMap
     flashTimer = 0
     
     for i in range(64):
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         set_rings(f)
         f.draw_sprite(pacX, 2, sprites.colorSprite(get_pac_image_name(), pacMap))
         pacX = pacX - 1            
@@ -168,11 +167,10 @@ with open("pacGEN.txt","w") as ps:
                 gm = blueGhostMap            
             flashTimer = 0
         
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")        
+        ps.write(f.to_string())        
     
     for i in range(64):
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         f.draw_sprite(pacX, 2, sprites.flipLeftRight(sprites.colorSprite(get_pac_image_name(), pacMap)))
         pacX = pacX + 1
         g = getRedGhostImageName()
@@ -182,6 +180,5 @@ with open("pacGEN.txt","w") as ps:
         ghost2X = ghost2X + 1
         
         drawFlasher(f,False,i-8)
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")   
+        ps.write(f.to_string())   
         

@@ -86,15 +86,18 @@ def fourByteNumber(number):
         
 
 if __name__=='__main__':
+    
+    #ROOT = "../FLL2018"
+    ROOT = "../FRC2018"
         
-    master = readLines("master.txt")
+    master = readLines("%s/master.txt" % (ROOT,))
     
     movies = []
     for m in master:
-        movies.append(readMovie(m))
+        movies.append(readMovie("%s/%s" % (ROOT,m)))
         
-    binA = open("a.bin","wb")
-    binB = open("b.bin","wb")
+    binA = open("%s/a.bin" % (ROOT,),"wb")
+    binB = open("%s/b.bin" % (ROOT,),"wb")
     
     preA = b'2018\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
     binA.write(preA)

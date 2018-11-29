@@ -93,7 +93,6 @@ with open('orbitGEN.txt','w') as ps:
                 # 0 1 2 3 4 4 4 4 4 4  4  4  4  5  6  7  
                 frame.set_pixel(orbit['x']-j,orbit['y'],orbit['color']+color_offset)
                 
-        ps.write('%\n')
-        ps.write(frame.to_string()+'\n')
+        ps.write(frame.to_string())
         
     

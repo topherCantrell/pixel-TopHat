@@ -1,5 +1,5 @@
 import SpriteLoader
-import HatFrame
+from pixel_hat import HatFrame
 
 sprites = SpriteLoader.SpriteLoader()
 
@@ -9,7 +9,7 @@ ghost = sprites.colorSprite("ghostc",ghostMap)
 pacMap = ['#', 3]
 pac = sprites.colorSprite("pac2", pacMap)
 
-f = HatFrame.HatFrame()
+f = HatFrame()
 
 f.draw_sprite(32-15+32, 1, ghost)  
 f.draw_sprite(32+1+32,2,pac)
@@ -38,5 +38,5 @@ f.set_ring(34, 4)
 f.set_ring(35, 5)
 
 with open("stillGEN.txt","w") as ps:
-    ps.write(f.to_string()+"\n")
+    ps.write(f.to_string())
     

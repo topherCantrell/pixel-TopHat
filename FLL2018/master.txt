@@ -4,6 +4,6 @@ invaders.txt
 orbit.txt
 lego.txt
 pacman.txt
-sparlke.txt
+sparkle.txt
 fll.txt
 orbit.txt

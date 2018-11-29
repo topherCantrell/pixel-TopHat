@@ -1,4 +1,4 @@
-import HatFrame
+from pixel_hat import HatFrame
 import random
 
 # 1831 possible
@@ -42,11 +42,10 @@ for z in range(2000):
     
 with open("sparkGEN.txt","w") as ps:
     for pix in pixels:
-        f = HatFrame.HatFrame()
+        f = HatFrame()
         for p in range(1831):
             if pix[p]!=0:
                 f.set_raw_pixel(p,pix[p])
-        ps.write("%\n")
-        ps.write(f.to_string()+"\n")
+        ps.write(f.to_string())
     
 

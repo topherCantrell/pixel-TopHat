@@ -20,5 +20,4 @@ with open("fllGEN.txt","w") as ps:
     frames = marquee.scroll_on_loop_off(13,'FLL 2018 Into Orbit ', 'FreeSerif9pt7b', colors,1,4)
     
     for frame in frames:
-        ps.write("%\n")
-        ps.write(frame.to_string()+"\n")
+        ps.write(frame.to_string())
