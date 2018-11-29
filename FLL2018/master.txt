@@ -1,14 +1,9 @@
-START:
-
 fll.txt
-pacman.txt
+lego.txt
 invaders.txt
+orbit.txt
+lego.txt
+pacman.txt
 sparlke.txt
-
-GOTO START
-
-BLANK:
-
-blank.txt
-
-GOTO BLANK
+fll.txt
+orbit.txt
