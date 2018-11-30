@@ -59,6 +59,7 @@ def readMovie(filename):
             break
         if g[0]=='#':
             cps,col = parse_color_spec(g[1:])
+            #print(":"+hex(cps)+":"+hex(col))
             ret['colors'][cps] = col
         if g.startswith("delay "):
             ret["delay"] = int(g[6:])

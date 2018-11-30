@@ -2,7 +2,7 @@ import serial
 import time
 import make_sds
 
-_ser = serial.Serial('COM10',115200)
+_ser = serial.Serial('COM9',115200)
 
 #_ser.write(b'sparkle\r')
 
@@ -35,12 +35,15 @@ def set_colors(colors):
     _ser.write(b'B')
     _send_buffer(col_buffer)
     
-def play_movie(filename,start_frame=0,end_frame=-1):
+def play_movie(filename,start_frame=0,end_frame=None):
     movie = make_sds.readMovie(filename)
     set_colors(movie['colors'])
     mfrs = movie['frames'][start_frame:end_frame]
     for mfr in mfrs:
         show_frame(mfr)
         time.sleep(.5)
+
+if __name__ == '__main__':    
+    # play_movie('color_test.txt')
+    play_movie('../FLL2018/lego.txt')
     
-play_movie('../FLL2018/pacman.txt')
