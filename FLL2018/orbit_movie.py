@@ -16,7 +16,7 @@ Color pattern:
 import random
 from pixel_hat import HatFrame
 
-TOTAL_ORBITERS = 24
+TOTAL_ORBITERS = 48
 ORBIT_DIRECTION = 1
 
 RANDOM_ORBITER_WAIT   = [ 4, 10]

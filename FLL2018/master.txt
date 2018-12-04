@@ -1,3 +1,5 @@
+: HERE
+
 fll.txt
 lego.txt
 invaders.txt
@@ -7,3 +9,5 @@ pacman.txt
 sparkle.txt
 fll.txt
 orbit.txt
+
+: GOTO HERE

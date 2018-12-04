@@ -10,6 +10,7 @@ def readLines(filename):
             if ';' in line:
                 i = line.index(';')
                 line = line[0:i]
+            line = line.strip()
             if len(line)>0:
                 ret.append(line)    
         return ret
@@ -88,14 +89,16 @@ def fourByteNumber(number):
 
 if __name__=='__main__':
     
-    #ROOT = "../FLL2018"
-    ROOT = "../FRC2018"
+    ROOT = "../CHRISTMAS2018"
+    #ROOT = "../FRC2018"
         
     master = readLines("%s/master.txt" % (ROOT,))
     
     movies = []
     for m in master:
-        movies.append(readMovie("%s/%s" % (ROOT,m)))
+        # TODO labels and GOTO
+        if m[0]!=':':
+            movies.append(readMovie("%s/%s" % (ROOT,m)))
         
     binA = open("%s/a.bin" % (ROOT,),"wb")
     binB = open("%s/b.bin" % (ROOT,),"wb")
@@ -123,17 +126,24 @@ if __name__=='__main__':
         binB.write(dt)
         
     for m in movies:
+        # 0123 - frame count (0 to repeat disk)
+        # 4567 - delay
+        #89AB - Next movie sector (0 to fall into next movie)
+    
         print(m["name"])
         # Write 1 sector info NUMFRAMES,DELAY
         dt = fourByteNumber(len(m["frames"]))
         binA.write(dt)
         binB.write(dt)
         dt = fourByteNumber(m["delay"])
-        binA.write(dt);
-        binB.write(dt);    
-        for x in range(0,512-8):
-            binA.write(b'\x00');
-            binB.write(b'\x00');
+        binA.write(dt)
+        binB.write(dt)    
+        dt = fourByteNumber(0) # TODO Sector number or 0 for next
+        binA.write(dt)
+        binB.write(dt)        
+        for x in range(0,512-12):
+            binA.write(b'\x00')
+            binB.write(b'\x00')
         
         # Write 2 sectors colors
         for x in range(0,256):
@@ -141,8 +151,8 @@ if __name__=='__main__':
                 dt = fourByteNumber(m["colors"][x])
             else:
                 dt = fourByteNumber(0)
-            binA.write(dt);
-            binB.write(dt);
+            binA.write(dt)
+            binB.write(dt)
             
         for f in m["frames"]:
             d = f.get_binary(True)
@@ -153,6 +163,12 @@ if __name__=='__main__':
             if len(d)!=1024:
                 raise Exception("Size "+str(len(d)))
             binB.write(d)
+            
+    # Write a blank sector on the end of the file. This makes a frame count of
+    # zero, which restarts the disk
+    
+    binA.write(bytes([0]*512))
+    binB.write(bytes([0]*512))
     
     binA.flush()
     binA.close()

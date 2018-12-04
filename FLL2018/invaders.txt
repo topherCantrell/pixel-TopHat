@@ -1,4 +1,4 @@
-delay 300 ; 300ms between each frame
+delay 250 ; 300ms between each frame
 
 ;   GG RR BB
 #00_00_00_00  ; Color 0 = black

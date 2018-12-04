@@ -45,5 +45,5 @@ def play_movie(filename,start_frame=0,end_frame=None):
 
 if __name__ == '__main__':    
     # play_movie('color_test.txt')
-    play_movie('../FLL2018/lego.txt')
+    play_movie('../CHRISTMAS2018/snow.txt')
     

@@ -132,7 +132,7 @@ def scroll_on_loop_off(y,s,font,colors,loops,rate=4):
     # Scroll off
     pos = pos + rate
     mar.enable_offscreen(True)
-    for _ in range(slen-64):
+    for _ in range(slen-64+64):
         mar.set_pos(pos+slen)
         frame = pixel_hat.HatFrame()
         ret.append(frame)            
