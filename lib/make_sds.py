@@ -89,8 +89,9 @@ def fourByteNumber(number):
 
 if __name__=='__main__':
     
-    ROOT = "../CHRISTMAS2018"
+    #ROOT = "../CHRISTMAS2018"
     #ROOT = "../FRC2018"
+    ROOT = "../FLL2018"
         
     master = readLines("%s/master.txt" % (ROOT,))
     
