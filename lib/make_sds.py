@@ -91,7 +91,8 @@ if __name__=='__main__':
     
     #ROOT = "../CHRISTMAS2018"
     #ROOT = "../FRC2018"
-    ROOT = "../FLL2018"
+    #ROOT = "../FLL2018"
+    ROOT = "../FRC2019"
         
     master = readLines("%s/master.txt" % (ROOT,))
     
