@@ -10,7 +10,7 @@ The hat in action: https://www.youtube.com/watch?v=POvtpbCsYLs
 
 https://youtu.be/zwyWCEgpvOA?t=411
 
-![](https://github.com/topherCantrell/FSM/blob/master/art/seen.jpg)
+![](art/seen.jpg)
 
 ### Published in Circuit Cellar, June 2018
 
@@ -111,3 +111,13 @@ starts with a 0 ends the list.
 ![](art/figure6.png)
 
 ![](art/figure7.png)
+
+# Glasses
+
+The B3 strand (edges of the top) only has 54 pixels. A connector in the hat near the left ear extends this strand to the glasses. The glasses
+are two rings of 24 pixels, 48 pixels total bringing B3 up to 102 pixels.
+
+![](art/glasses1.jpg)
+
+![](art/glasses2.jpg)
+
