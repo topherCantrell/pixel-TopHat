@@ -121,3 +121,5 @@ are two rings of 24 pixels, 48 pixels total bringing B3 up to 102 pixels.
 
 ![](art/glasses2.jpg)
 
+![](art/glassesMap.jpg)
+
