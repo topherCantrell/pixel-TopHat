@@ -4,17 +4,19 @@ A top hat covered in NEO pixels for the 2017/2018 FIRST Robotics season.
 
 Much thanks to my buddy Gary Dion for suggestions and support.
 
-The hat in action: https://www.youtube.com/watch?v=POvtpbCsYLs
-
-### As seen on Adafruit Show and Tell 
-
+### As seen on Adafruit Show and Tell
+[![](art/adafruit.jpg)](https://www.adafruit.com/) <br>
 https://youtu.be/zwyWCEgpvOA?t=411
 
-![](art/seen.jpg)
+### As Seen In Circuit Cellar Magazine
+[![](art/circuitcellar.jpg)](https://circuitcellar.com/)<br>
+https://cc-webshop.com/collections/circuit-cellar-2018/products/circuit-cellar-335-june-2018-pdf
 
-### Published in Circuit Cellar, June 2018
+### As seen on Youtube
+[![](art/youtube.jpg)](https://www.youtube.com/) <br>
+https://www.youtube.com/watch?v=POvtpbCsYLs
 
-#2018
+# TODO
 
 I am using the hat for the Huntsville Christmas parade. Outstanding items:
   - Type in text for marquee
