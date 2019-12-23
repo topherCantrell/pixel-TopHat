@@ -114,20 +114,27 @@ class HatFrame:
         self.topEdges = [0] * (27+27)
         self.topRing =  [0] * 241
         self.sideBrim = [0] * (256*6)
+        #
+        self.glasses =  [0] * 48
         
         if raw != None:            
         
             raw = raw.replace("-", "")
             raw = raw.replace("|", "")
             raw = raw.replace(" ", "")
-            raw = raw.replace("..", "00")                
+            raw = raw.replace("@", "")
+            raw = raw.replace("..", "00")               
             
-            if len(raw)!=1831*2:
+            if len(raw)!=1831*2 and len(raw)!=1879*2:
                 raise Exception("Invalid frame text representation")        
                     
             self.topEdges = self._run_from_string(raw,0,54)
             self.topRing = self._run_from_string(raw,54,241)
-            self.sideBrim = self._run_from_string(raw,295,256*6)               
+            self.sideBrim = self._run_from_string(raw,295,256*6)    
+            
+            # If the glasses are given   
+            if len(raw)==1879*2:
+                self.glasses = self._run_from_string(raw,1831,48)                  
         
     def set_pixel(self,x,y,color):
         if x==None or y==None:
@@ -227,8 +234,11 @@ class HatFrame:
                 ret = ret + "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"            
             ret = ret + v + "\n"        
         ret = ret + "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
-        ret = ret + "\n"
-        
+        ret = ret + "@\n" # Glasses
+        v =  self._data_run(self.glasses,0,48)
+        v = v[0:72]+"| "+v[72:]
+        ret = ret + v + "\n"
+        ret = ret + "\n"        
         return ret
     
     def _run_from_string(self,s,binOffset,count):
@@ -267,16 +277,19 @@ class HatFrame:
     def get_binary(self,cpuA):
         ret = b''  
         if cpuA:
-            ret = ret + self._get_rectangle(0,0)
-            ret = ret + self._get_rectangle(32,0)
-            ret = ret + self._get_rectangle(0,8)
-            ret = ret + self._get_rectangle(32,8)        
+            ret = ret + self._get_rectangle(0,0)  # 256
+            ret = ret + self._get_rectangle(32,0) # 256
+            ret = ret + self._get_rectangle(0,8)  # 256
+            ret = ret + self._get_rectangle(32,8) # 256       
         else:
-            ret = ret + self._get_brim_rectangle(0,16)
-            ret = ret + self._get_brim_rectangle(32,16)            
-            ret = ret + bytes(self.topEdges)            
-            ret = ret + b'\x00' * 202            
-            ret = ret + bytes(self.topRing)
-            ret = ret + b'\x00' * 15
+            ret = ret + self._get_brim_rectangle(0,16)  # 256
+            ret = ret + self._get_brim_rectangle(32,16) # 256
+            #           
+            ret = ret + bytes(self.topEdges) # 54
+            ret = ret + bytes(self.glasses)  # 48
+            ret = ret + b'\x00' * 154
+            #            
+            ret = ret + bytes(self.topRing) #241
+            ret = ret + b'\x00' * 15            
         
         return ret
