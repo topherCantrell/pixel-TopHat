@@ -25,6 +25,9 @@ I am using the hat for the Huntsville Christmas parade. Outstanding items:
 
 # Parts
 
+Foam:<br>
+https://www.amazon.com/gp/product/B00069PFKK/ref=ppx_yo_dt_b_asin_title_o00_s00
+
 Four flexible grids for the body. $148<br>
 http://www.ebay.com/itm/282616038722<br>
 From adafruit: https://www.adafruit.com/product/2294
